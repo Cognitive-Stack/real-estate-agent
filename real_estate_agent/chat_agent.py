@@ -16,7 +16,21 @@ from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
 from autogen_agentchat.ui import Console
 from autogen_core.memory import ListMemory, MemoryContent, MemoryMimeType
-from .tools_v1 import REAL_ESTATE_TOOLS
+from .tools_v1 import REAL_ESTATE_TOOLS, get_global_preference_manager
+
+# Import our custom logging configuration
+import sys
+sys.path.append('..')
+try:
+    from logging_config import setup_advanced_logging, add_autogen_highlights, suppress_mongodb_logs
+except ImportError:
+    # Fallback to basic logging if custom config is not available
+    def setup_advanced_logging(log_level="INFO", enable_file_logging=True):
+        logging.basicConfig(level=getattr(logging, log_level.upper()))
+    def add_autogen_highlights():
+        pass
+    def suppress_mongodb_logs():
+        pass
 
 # Load environment variables
 load_dotenv()
@@ -60,12 +74,13 @@ class RealEstateChatAgent:
         self.logger.info(f"Using model: {self.model_name}")
         
         
-        # Initialize the model client and memory
+        # Initialize the model client, memory, and preference manager
         self.model_client = self._create_model_client()
         self.memory = self._create_memory()
+        self.preference_manager = get_global_preference_manager()
         
-        # Load default user preferences into memory
-        asyncio.create_task(self._load_default_user_preferences())
+        # Load user preferences from JSON into memory
+        asyncio.create_task(self._load_user_preferences_to_memory())
         
         self.agent = self._create_agent()
     
@@ -112,30 +127,90 @@ class RealEstateChatAgent:
         self.logger.info("Adding default real estate knowledge to memory")
         return memory
     
-    async def _load_default_user_preferences(self) -> None:
-        """Load default user preferences into memory."""
+    async def _load_user_preferences_to_memory(self) -> None:
+        """Load user preferences from JSON file into memory."""
         try:
-            # Add default user profile
+            # Get preferences from JSON file
+            preferences = self.preference_manager.get_preferences()
+            
+            # Load user profile into memory
+            user_profile = preferences.get("user_profile", {})
+            if user_profile.get("name") or any(user_profile.values()):
+                memory_content = MemoryContent(
+                    content=f"User Profile: {user_profile}",
+                    mime_type=MemoryMimeType.TEXT,
+                    metadata={"category": "user_profile", "type": "user_preference", "priority": "high"}
+                )
+                await self.memory.add(memory_content)
+                self.logger.info("User profile loaded from JSON file into memory")
+            
+            # Load property preferences into memory
+            property_prefs = preferences.get("property_preferences", {})
+            if any(v for v in property_prefs.values() if v not in [None, [], ""]):
+                memory_content = MemoryContent(
+                    content=f"Property Preferences: {property_prefs}",
+                    mime_type=MemoryMimeType.TEXT,
+                    metadata={"category": "property_preferences", "type": "user_preference", "priority": "high"}
+                )
+                await self.memory.add(memory_content)
+                self.logger.info("Property preferences loaded from JSON file into memory")
+            
+            # Load recent conversation context if available
+            context = preferences.get("conversation_context", {})
+            if context.get("recent_interests"):
+                memory_content = MemoryContent(
+                    content=f"Recent Interests: {context['recent_interests']}",
+                    mime_type=MemoryMimeType.TEXT,
+                    metadata={"category": "conversation_context", "type": "user_preference"}
+                )
+                await self.memory.add(memory_content)
+                self.logger.info("Conversation context loaded from JSON file into memory")
+
+        except Exception as e:
+            self.logger.error(f"Error loading user preferences from JSON file: {e}")
+            # Fallback to loading default preferences if JSON loading fails
+            await self._load_default_user_preferences()
+    
+    async def _load_default_user_preferences(self) -> None:
+        """Load default user preferences if no JSON file exists."""
+        try:
+            # This will create the default JSON structure
             default_profile = { 
                 "name": "Lê Việt Thắng",
                 "phone_number": "+1234567890",
                 "age": 25,
-                "interest_properties_type": "apartment",
-                "interest_properties_location": "Quận 9, Hồ Chí Minh",
-                "interest_properties_price": "2 tỷ VND",
-                "interest_properties_bedrooms": 2,
-                "interest_properties_balcony": True,
-                "interest_properties_nearby_schools": True,
-                "interest_properties_nearby_parks": True
+            }
+            
+            default_property_prefs = {
+                "property_type": ["apartment"],
+                "locations": ["Quận 9, Hồ Chí Minh"],
+                "budget_max": 2000000000,  # 2 tỷ VND
+                "currency": "VND",
+                "bedrooms_min": 2,
+                "must_have_amenities": ["balcony"],
+                "nice_to_have_amenities": ["nearby_schools", "nearby_parks"]
             }
 
+            # Update the JSON file with defaults
+            self.preference_manager.update_user_profile(**default_profile)
+            self.preference_manager.update_property_preferences(**default_property_prefs)
+
+            # Load into memory
             memory_content = MemoryContent(
                 content=default_profile,
                 mime_type=MemoryMimeType.JSON,
                 metadata={"category": "user_profile", "type": "user_preference", "priority": "high"}
             )
             await self.memory.add(memory_content)
-            self.logger.info("Default user profile loaded into memory")
+
+            memory_content = MemoryContent(
+                content=f"Property Preferences: {default_property_prefs}",
+                mime_type=MemoryMimeType.TEXT,
+                metadata={"category": "property_preferences", "type": "user_preference", "priority": "high"}
+            )
+            await self.memory.add(memory_content)
+            
+            self.logger.info("Default user preferences created and loaded into memory")
 
         except Exception as e:
             self.logger.error(f"Error loading default user preferences: {e}")
@@ -262,6 +337,16 @@ class RealEstateChatAgent:
         5. Help with understanding legal aspects of real estate transactions
         6. Search properties using function calls ONLY when users ask about specific properties or want to search the database
         7. Remember user preferences and conversation context to provide personalized assistance
+        8. Update and manage user preferences automatically based on conversation context
+        
+        IMPORTANT - User Preference Management:
+        - You have access to user preference management functions to update user profile and property preferences
+        - When users mention their preferences (budget, location, property type, amenities, etc.), AUTOMATICALLY call the appropriate preference update functions
+        - Use update_user_profile() when users mention personal information (name, phone, email, age)
+        - Use update_property_preferences() when users mention property preferences (budget, location, property type, amenities, etc.)
+        - Use update_recent_interests() to track topics and properties users show interest in
+        - Use add_search_to_history() to track property searches performed
+        - Call get_user_preferences() to retrieve current preferences when needed for personalized responses
         
         IMPORTANT - User Preference Usage:
         - ALWAYS check if user preferences are available in memory before responding
@@ -271,18 +356,21 @@ class RealEstateChatAgent:
         - Adapt your recommendations based on the user's profile (age, budget, location preferences, etc.)
         
         IMPORTANT - When to use function calls:
-        - ONLY use function calling tools when users explicitly ask to search for specific properties, contractors, developers, locations, or other database information
-        - DO NOT use function calls for: greetings, general questions, explanations, advice, market trends, educational content, or casual conversation
-        - Examples that DO NOT need function calls: "hello", "what is a mortgage?", "how does real estate work?", "give me investment advice"
-        - Examples that DO need function calls: "find properties in Bangkok", "search for contractors", "show me developers", "look for apartments under $500k"
+        - ONLY use property/project search functions when users explicitly ask to search for specific properties, contractors, developers, locations, or other database information
+        - ALWAYS use preference management functions when users mention preferences, personal info, or show interest in specific topics
+        - DO NOT use property search functions for: greetings, general questions, explanations, advice, market trends, educational content, or casual conversation
+        - Examples that DO NOT need property search: "hello", "what is a mortgage?", "how does real estate work?", "give me investment advice"
+        - Examples that DO need property search: "find properties in Bangkok", "search for contractors", "show me developers", "look for apartments under $500k"
+        - Examples that need preference updates: "I'm looking for a 2-bedroom apartment", "My budget is 3 million", "I prefer locations near schools"
         
         MEMORY USAGE:
         - You have access to conversation history and user preferences through your memory system
+        - User preferences are automatically saved to a JSON file for persistence across sessions
         - Use this information to provide personalized responses and remember user preferences
-        - When users mention preferences (budget, location, property type, etc.), consider this in your responses
+        - When users mention preferences, update them immediately using the preference management functions
         - Always prioritize user-specified preferences over default assumptions
         
-        For general real estate advice, market education, process explanations, or casual conversation, respond directly from your knowledge without using any function calls, but always consider user preferences when relevant.
+        For general real estate advice, market education, process explanations, or casual conversation, respond directly from your knowledge without using property search functions, but always consider user preferences when relevant and update preferences when mentioned.
         
         Be professional, accurate, and helpful. When providing property information from searches,
         include relevant details like area, price, amenities, and location that match user preferences.
@@ -390,13 +478,17 @@ class RealEstateChatAgent:
         print("=" * 60)
         print("Welcome! I'm your real estate assistant with memory capabilities.")
         print("I'll remember your preferences and conversation history to provide personalized assistance!")
-        print("💡 Tip: Messages will stream in real-time as they're generated.")
+        print("� Your preferences are automatically saved to 'user_preferences.json' file.")
+        print("🤖 I can automatically update your preferences based on our conversation!")
+        print("�💡 Tip: Messages will stream in real-time as they're generated.")
         print("Type 'quit', 'exit', or 'bye' to end the conversation.")
         print("Type 'memory' to see what I remember about our conversation.")
         print("Type 'preferences' to see your current preferences.")
         print("Type 'clear memory' to clear my memory.")
         print("Type 'update preference [key] [value]' to update a specific preference.")
-        print("Logs are being saved to 'real_estate_agent.log' file.\n")
+        print("Logs are being saved to 'real_estate_agent.log' file.")
+        print(f"📁 Preferences file location: {self.preference_manager.preferences_file}")
+        print()
         
         while True:
             try:
@@ -417,9 +509,9 @@ class RealEstateChatAgent:
                 
                 if user_input.lower() == 'clear memory':
                     await self.clear_memory()
-                    # Reload default preferences after clearing
-                    await self._load_default_user_preferences()
-                    print("🧠 Memory cleared successfully! Default preferences reloaded.")
+                    # Reload preferences from JSON file after clearing memory
+                    await self._load_user_preferences_to_memory()
+                    print("🧠 Memory cleared successfully! Preferences reloaded from JSON file.")
                     continue
                 
                 if user_input.lower().startswith('update preference'):
@@ -480,25 +572,54 @@ class RealEstateChatAgent:
             print(f"❌ Error retrieving memory contents: {e}")
     
     async def _show_user_preferences(self):
-        """Display current user preferences."""
+        """Display current user preferences from JSON file."""
         try:
-            preferences = await self.get_user_preferences()
+            # Get preferences directly from JSON file
+            json_preferences = self.preference_manager.get_preferences()
             
-            if not preferences:
-                print("👤 No user preferences found.")
+            if not json_preferences:
+                print("👤 No user preferences found in JSON file.")
                 return
             
-            print("👤 Current User Preferences:")
-            print("=" * 30)
+            print("👤 Current User Preferences (from JSON file):")
+            print("=" * 50)
             
-            for category, items in preferences.items():
-                print(f"\n📋 {category.title().replace('_', ' ')}:")
-                for i, preference in enumerate(items, 1):
-                    # Truncate long preferences for display
-                    display_pref = preference[:80] + "..." if len(preference) > 80 else preference
-                    print(f"  {i}. {display_pref}")
+            # Show user profile
+            user_profile = json_preferences.get("user_profile", {})
+            if any(v for v in user_profile.values() if v not in [None, "", "Updated at:"]):
+                print("\n📋 User Profile:")
+                for key, value in user_profile.items():
+                    if value and key != "updated_at":
+                        print(f"  • {key.replace('_', ' ').title()}: {value}")
+                    elif key == "updated_at" and value:
+                        print(f"  • Last Updated: {value}")
             
-            print("=" * 30)
+            # Show property preferences
+            property_prefs = json_preferences.get("property_preferences", {})
+            if any(v for v in property_prefs.values() if v not in [None, [], "", "Updated at:"]):
+                print("\n🏠 Property Preferences:")
+                for key, value in property_prefs.items():
+                    if value and key != "updated_at":
+                        if isinstance(value, list) and value:
+                            print(f"  • {key.replace('_', ' ').title()}: {', '.join(map(str, value))}")
+                        elif not isinstance(value, list):
+                            print(f"  • {key.replace('_', ' ').title()}: {value}")
+                    elif key == "updated_at" and value:
+                        print(f"  • Last Updated: {value}")
+            
+            # Show search history count
+            search_history = json_preferences.get("search_history", [])
+            if search_history:
+                print(f"\n🔍 Search History: {len(search_history)} searches recorded")
+            
+            # Show recent interests
+            context = json_preferences.get("conversation_context", {})
+            recent_interests = context.get("recent_interests", [])
+            if recent_interests:
+                print(f"\n💭 Recent Interests: {', '.join(recent_interests)}")
+            
+            print("=" * 50)
+            print(f"📁 Preferences saved in: {self.preference_manager.preferences_file}")
             
         except Exception as e:
             self.logger.error(f"Error showing user preferences: {e}")

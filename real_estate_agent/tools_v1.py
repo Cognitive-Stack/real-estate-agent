@@ -9,6 +9,138 @@ import json
 import os
 from typing import List, Dict, Any, Optional, Union, Annotated
 from pathlib import Path
+from datetime import datetime
+
+
+from datetime import datetime
+
+
+class UserPreferenceManager:
+    """Manager for user preferences with JSON file storage."""
+    
+    def __init__(self, preferences_file: str = None):
+        """
+        Initialize the preference manager.
+        
+        Args:
+            preferences_file: Path to the preferences JSON file. If None, uses default path.
+        """
+        if preferences_file is None:
+            # Get the project root directory and store preferences there
+            current_dir = Path(__file__).parent.parent
+            self.preferences_file = current_dir / "user_preferences.json"
+        else:
+            self.preferences_file = Path(preferences_file)
+        
+        # Ensure the directory exists
+        self.preferences_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Load or create initial preferences
+        self._load_or_create_preferences()
+    
+    def _load_or_create_preferences(self):
+        """Load existing preferences or create a new file with default structure."""
+        try:
+            if self.preferences_file.exists():
+                with open(self.preferences_file, 'r', encoding='utf-8') as f:
+                    self.preferences = json.load(f)
+            else:
+                # Create default preferences structure
+                self.preferences = {
+                    "user_profile": {
+                        "name": "",
+                        "phone_number": "",
+                        "email": "",
+                        "age": None,
+                        "created_at": datetime.now().isoformat(),
+                        "updated_at": datetime.now().isoformat()
+                    },
+                    "property_preferences": {
+                        "property_type": [],  # e.g., ["apartment", "condo", "house"]
+                        "budget_min": None,
+                        "budget_max": None,
+                        "currency": "VND",
+                        "locations": [],  # preferred locations
+                        "bedrooms_min": None,
+                        "bedrooms_max": None,
+                        "bathrooms_min": None,
+                        "size_min_sqm": None,
+                        "size_max_sqm": None,
+                        "must_have_amenities": [],  # required amenities
+                        "nice_to_have_amenities": [],  # preferred but not required
+                        "updated_at": datetime.now().isoformat()
+                    },
+                    "search_history": [],
+                    "conversation_context": {
+                        "last_search_criteria": {},
+                        "recent_interests": [],
+                        "updated_at": datetime.now().isoformat()
+                    }
+                }
+                self._save_preferences()
+        except Exception as e:
+            print(f"Error loading preferences: {e}")
+            self.preferences = {}
+    
+    def _save_preferences(self):
+        """Save preferences to JSON file."""
+        try:
+            # Update the last modified timestamp
+            self.preferences["user_profile"]["updated_at"] = datetime.now().isoformat()
+            
+            with open(self.preferences_file, 'w', encoding='utf-8') as f:
+                json.dump(self.preferences, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"Error saving preferences: {e}")
+    
+    def update_user_profile(self, **kwargs):
+        """Update user profile information."""
+        for key, value in kwargs.items():
+            if key in self.preferences["user_profile"]:
+                self.preferences["user_profile"][key] = value
+        self._save_preferences()
+    
+    def update_property_preferences(self, **kwargs):
+        """Update property preferences."""
+        for key, value in kwargs.items():
+            if key in self.preferences["property_preferences"]:
+                self.preferences["property_preferences"][key] = value
+        self.preferences["property_preferences"]["updated_at"] = datetime.now().isoformat()
+        self._save_preferences()
+    
+    def add_to_search_history(self, search_criteria: Dict[str, Any]):
+        """Add a search to the history."""
+        search_entry = {
+            "criteria": search_criteria,
+            "timestamp": datetime.now().isoformat()
+        }
+        self.preferences["search_history"].append(search_entry)
+        
+        # Keep only the last 50 searches
+        if len(self.preferences["search_history"]) > 50:
+            self.preferences["search_history"] = self.preferences["search_history"][-50:]
+        
+        self._save_preferences()
+    
+    def update_conversation_context(self, **kwargs):
+        """Update conversation context."""
+        for key, value in kwargs.items():
+            if key in self.preferences["conversation_context"]:
+                self.preferences["conversation_context"][key] = value
+        self.preferences["conversation_context"]["updated_at"] = datetime.now().isoformat()
+        self._save_preferences()
+    
+    def get_preferences(self):
+        """Get all preferences."""
+        return self.preferences.copy()
+    
+    def get_user_profile(self):
+        """Get user profile."""
+        return self.preferences.get("user_profile", {}).copy()
+    
+    def get_property_preferences(self):
+        """Get property preferences."""
+        return self.preferences.get("property_preferences", {}).copy()
 
 
 class RealEstateDataTools:
@@ -462,6 +594,7 @@ tools.search_projects_by_criteria(developer="Vinhomes", status="đang mở bán"
 
 # Global instance for function calling
 _global_tools = None
+_global_preference_manager = None
 
 def get_global_tools() -> RealEstateDataTools:
     """Get or create the global tools instance."""
@@ -469,6 +602,14 @@ def get_global_tools() -> RealEstateDataTools:
     if _global_tools is None:
         _global_tools = RealEstateDataTools()
     return _global_tools
+
+
+def get_global_preference_manager() -> UserPreferenceManager:
+    """Get or create the global preference manager instance."""
+    global _global_preference_manager
+    if _global_preference_manager is None:
+        _global_preference_manager = UserPreferenceManager()
+    return _global_preference_manager
 
 
 # Function calling tools for AutoGen
@@ -615,6 +756,157 @@ def get_all_property_groups() -> List[Dict[str, Any]]:
     return tools.get_all_property_groups()
 
 
+# User Preference Management Function Calling Tools
+def update_user_profile(
+    name: Annotated[Optional[str], "User's full name"] = None,
+    phone_number: Annotated[Optional[str], "User's phone number"] = None,
+    email: Annotated[Optional[str], "User's email address"] = None,
+    age: Annotated[Optional[int], "User's age"] = None
+) -> Dict[str, Any]:
+    """
+    Update user profile information in the preferences file.
+    
+    Args:
+        name: User's full name
+        phone_number: User's phone number
+        email: User's email address
+        age: User's age
+    
+    Returns:
+        Updated user profile information
+    """
+    preference_manager = get_global_preference_manager()
+    
+    # Filter out None values
+    updates = {k: v for k, v in locals().items() if v is not None and k != 'preference_manager'}
+    
+    if updates:
+        preference_manager.update_user_profile(**updates)
+        return {
+            "status": "success",
+            "message": f"Updated user profile: {list(updates.keys())}",
+            "updated_profile": preference_manager.get_user_profile()
+        }
+    else:
+        return {
+            "status": "no_updates",
+            "message": "No profile updates provided",
+            "current_profile": preference_manager.get_user_profile()
+        }
+
+
+def update_property_preferences(
+    property_type: Annotated[Optional[List[str]], "List of preferred property types (e.g., ['apartment', 'condo'])"] = None,
+    budget_min: Annotated[Optional[float], "Minimum budget"] = None,
+    budget_max: Annotated[Optional[float], "Maximum budget"] = None,
+    currency: Annotated[Optional[str], "Currency (e.g., 'VND', 'USD')"] = None,
+    locations: Annotated[Optional[List[str]], "List of preferred locations"] = None,
+    bedrooms_min: Annotated[Optional[int], "Minimum number of bedrooms"] = None,
+    bedrooms_max: Annotated[Optional[int], "Maximum number of bedrooms"] = None,
+    bathrooms_min: Annotated[Optional[int], "Minimum number of bathrooms"] = None,
+    size_min_sqm: Annotated[Optional[float], "Minimum size in square meters"] = None,
+    size_max_sqm: Annotated[Optional[float], "Maximum size in square meters"] = None,
+    must_have_amenities: Annotated[Optional[List[str]], "List of required amenities"] = None,
+    nice_to_have_amenities: Annotated[Optional[List[str]], "List of preferred amenities"] = None
+) -> Dict[str, Any]:
+    """
+    Update property preferences in the preferences file.
+    
+    Args:
+        property_type: List of preferred property types
+        budget_min: Minimum budget
+        budget_max: Maximum budget
+        currency: Currency preference
+        locations: List of preferred locations
+        bedrooms_min: Minimum number of bedrooms
+        bedrooms_max: Maximum number of bedrooms
+        bathrooms_min: Minimum number of bathrooms
+        size_min_sqm: Minimum size in square meters
+        size_max_sqm: Maximum size in square meters
+        must_have_amenities: List of required amenities
+        nice_to_have_amenities: List of preferred amenities
+    
+    Returns:
+        Updated property preferences
+    """
+    preference_manager = get_global_preference_manager()
+    
+    # Filter out None values
+    updates = {k: v for k, v in locals().items() if v is not None and k != 'preference_manager'}
+    
+    if updates:
+        preference_manager.update_property_preferences(**updates)
+        return {
+            "status": "success",
+            "message": f"Updated property preferences: {list(updates.keys())}",
+            "updated_preferences": preference_manager.get_property_preferences()
+        }
+    else:
+        return {
+            "status": "no_updates",
+            "message": "No property preference updates provided",
+            "current_preferences": preference_manager.get_property_preferences()
+        }
+
+
+def get_user_preferences() -> Dict[str, Any]:
+    """
+    Get all current user preferences from the preferences file.
+    
+    Returns:
+        Complete user preferences including profile and property preferences
+    """
+    preference_manager = get_global_preference_manager()
+    return {
+        "status": "success",
+        "preferences": preference_manager.get_preferences()
+    }
+
+
+def add_search_to_history(
+    search_criteria: Annotated[Dict[str, Any], "The search criteria used"]
+) -> Dict[str, Any]:
+    """
+    Add a property search to the user's search history.
+    
+    Args:
+        search_criteria: Dictionary containing the search parameters used
+    
+    Returns:
+        Confirmation of search history update
+    """
+    preference_manager = get_global_preference_manager()
+    preference_manager.add_to_search_history(search_criteria)
+    
+    return {
+        "status": "success",
+        "message": "Search added to history",
+        "search_criteria": search_criteria
+    }
+
+
+def update_recent_interests(
+    interests: Annotated[List[str], "List of recent property interests or keywords mentioned by user"]
+) -> Dict[str, Any]:
+    """
+    Update the user's recent interests based on conversation context.
+    
+    Args:
+        interests: List of recent interests, keywords, or topics the user mentioned
+    
+    Returns:
+        Updated conversation context
+    """
+    preference_manager = get_global_preference_manager()
+    preference_manager.update_conversation_context(recent_interests=interests)
+    
+    return {
+        "status": "success",
+        "message": "Recent interests updated",
+        "interests": interests
+    }
+
+
 # List of all function calling tools
 REAL_ESTATE_TOOLS = [
     search_properties_by_criteria,
@@ -626,4 +918,10 @@ REAL_ESTATE_TOOLS = [
     get_properties_by_group_id,
     get_all_properties,
     get_all_property_groups,
+    # User preference management tools
+    update_user_profile,
+    update_property_preferences,
+    get_user_preferences,
+    add_search_to_history,
+    update_recent_interests,
 ]
