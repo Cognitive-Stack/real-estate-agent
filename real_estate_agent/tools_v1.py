@@ -242,20 +242,31 @@ class RealEstateDataTools:
     
     def search_properties_by_criteria(self, **criteria) -> List[Dict[str, Any]]:
         """
-        Search properties based on various criteria.
+        Search properties based on various criteria with exact matching.
         
         Args:
             **criteria: Search criteria such as:
-                - number_of_bedrooms: int
-                - number_of_bathrooms: int
-                - min_area: float (minimum gross floor area)
-                - max_area: float (maximum gross floor area)
-                - min_price: float (minimum price)
-                - max_price: float (maximum price)
-                - has_balcony: bool
-                
+            - number_of_bedrooms: int (exact match, e.g., 2 for "2-bedroom")
+            - number_of_bathrooms: int (exact match, e.g., 2 for "2-bathroom")
+            - min_area: float (minimum gross floor area in m², e.g., 50.0)
+            - max_area: float (maximum gross floor area in m², e.g., 120.0)
+            - min_price: float (minimum total price, e.g., 2000000000 for 2 billion VND)
+            - max_price: float (maximum total price, e.g., 5000000000 for 5 billion VND)
+            - has_balcony: bool (True if balcony required, False if not allowed)
+            - furnished: bool (True if furnished required, False if unfurnished required)
+            
         Returns:
-            List of property data dictionaries matching the criteria
+            List of property data dictionaries matching ALL specified criteria
+            
+        Example:
+            # Find 2-bedroom apartments with balcony, 50-100 sqm, under 3 billion VND
+            search_properties_by_criteria(
+                number_of_bedrooms=2,
+                min_area=50.0,
+                max_area=100.0,
+                max_price=3000000000,
+                has_balcony=True
+            )
         """
         matching_properties = []
         
@@ -306,6 +317,16 @@ class RealEstateDataTools:
                 elif criterion == "furnished":
                     furnished = property_values.get("furnished", False)
                     if furnished != expected_value:
+                        return False
+                        
+                elif criterion == "min_price":
+                    price = property_values.get("total_price", 0)
+                    if price < expected_value:
+                        return False
+                        
+                elif criterion == "max_price":
+                    price = property_values.get("total_price", float('inf'))
+                    if price > expected_value:
                         return False
             
             return True
@@ -561,12 +582,25 @@ def get_property_search_help() -> str:
     """
     return """
 Available property search criteria:
-- number_of_bedrooms: Number of bedrooms (integer)
-- number_of_bathrooms: Number of bathrooms (integer)
+- number_of_bedrooms: Number of bedrooms (integer, exact match)
+- number_of_bathrooms: Number of bathrooms (integer, exact match)
 - min_area: Minimum gross floor area in m² (float)
 - max_area: Maximum gross floor area in m² (float)
+- min_price: Minimum price in local currency (float)
+- max_price: Maximum price in local currency (float)
 - has_balcony: Whether property has balcony/logia (boolean)
 - furnished: Whether property is furnished (boolean)
+
+PRICE CONVERSION GUIDE:
+- Vietnamese: "3 tỷ VND" = 3000000000 (3 billion)
+- Vietnamese: "500 triệu VND" = 500000000 (500 million)
+- US Dollar: "$300k" = 300000
+
+EXAMPLE SEARCHES:
+- 2-bedroom with balcony: number_of_bedrooms=2, has_balcony=True
+- Under 3 billion VND: max_price=3000000000
+- 50-100 sqm: min_area=50.0, max_area=100.0
+- Budget 2-4 billion: min_price=2000000000, max_price=4000000000
 
 Example usage:
 tools.search_properties_by_criteria(number_of_bedrooms=2, min_area=50, has_balcony=True)
@@ -614,18 +648,48 @@ def get_global_preference_manager() -> UserPreferenceManager:
 
 # Function calling tools for AutoGen
 def search_properties_by_criteria(
-    number_of_bedrooms: Annotated[Optional[int], "Number of bedrooms"] = None,
-    number_of_bathrooms: Annotated[Optional[int], "Number of bathrooms"] = None,
-    min_area: Annotated[Optional[float], "Minimum gross floor area in m²"] = None,
-    max_area: Annotated[Optional[float], "Maximum gross floor area in m²"] = None,
-    has_balcony: Annotated[Optional[bool], "Whether property has balcony/logia"] = None,
-    furnished: Annotated[Optional[bool], "Whether property is furnished"] = None,
+    number_of_bedrooms: Annotated[Optional[int], "Exact number of bedrooms required (e.g., 1, 2, 3)"] = None,
+    number_of_bathrooms: Annotated[Optional[int], "Exact number of bathrooms required (e.g., 1, 2, 3)"] = None,
+    min_area: Annotated[Optional[float], "Minimum gross floor area in square meters (e.g., 50.0 for 50 sqm)"] = None,
+    max_area: Annotated[Optional[float], "Maximum gross floor area in square meters (e.g., 120.0 for 120 sqm)"] = None,
+    min_price: Annotated[Optional[float], "Minimum price in the property's currency (e.g., 2000000000 for 2 billion VND)"] = None,
+    max_price: Annotated[Optional[float], "Maximum price in the property's currency (e.g., 5000000000 for 5 billion VND)"] = None,
+    has_balcony: Annotated[Optional[bool], "Whether property must have a balcony or logia (True/False)"] = None,
+    furnished: Annotated[Optional[bool], "Whether property must be furnished (True/False)"] = None,
 ) -> List[Dict[str, Any]]:
     """
-    Search for properties based on specified criteria.
+    Search for properties in the database based on specific criteria. Use this function when users want to:
+    - Find properties matching specific requirements
+    - Search for apartments/condos/houses with certain features
+    - Look for properties within a budget range
+    - Find properties with specific room counts or sizes
+    
+    IMPORTANT USAGE GUIDELINES:
+    - Use exact numbers for bedrooms/bathrooms (e.g., number_of_bedrooms=2 for "2-bedroom")
+    - For price searches, use the actual currency amounts (VND prices are typically in billions)
+    - Area is in square meters (common range: 30-200 sqm for apartments)
+    - Set has_balcony=True only if user specifically mentions wanting a balcony
+    - Set furnished=True only if user specifically mentions wanting furnished property
+    
+    EXAMPLES:
+    - "2-bedroom apartment" → number_of_bedrooms=2
+    - "under 3 billion VND" → max_price=3000000000
+    - "at least 80 sqm" → min_area=80.0
+    - "with balcony" → has_balcony=True
+    - "budget 2-4 billion" → min_price=2000000000, max_price=4000000000
+    
+    Args:
+        number_of_bedrooms: Exact number of bedrooms (1, 2, 3, etc.)
+        number_of_bathrooms: Exact number of bathrooms (1, 2, 3, etc.)
+        min_area: Minimum size in square meters
+        max_area: Maximum size in square meters  
+        min_price: Minimum price in local currency (VND/USD/etc.)
+        max_price: Maximum price in local currency (VND/USD/etc.)
+        has_balcony: Must have balcony/logia (True) or doesn't matter (None)
+        furnished: Must be furnished (True) or doesn't matter (None)
     
     Returns:
-        List of properties matching the criteria
+        List of property dictionaries matching ALL specified criteria
     """
     tools = get_global_tools()
     criteria = {}
@@ -637,6 +701,10 @@ def search_properties_by_criteria(
         criteria['min_area'] = min_area
     if max_area is not None:
         criteria['max_area'] = max_area
+    if min_price is not None:
+        criteria['min_price'] = min_price
+    if max_price is not None:
+        criteria['max_price'] = max_price
     if has_balcony is not None:
         criteria['has_balcony'] = has_balcony
     if furnished is not None:
@@ -909,15 +977,15 @@ def update_recent_interests(
 
 # List of all function calling tools
 REAL_ESTATE_TOOLS = [
-    search_properties_by_criteria,
-    get_property_by_id,
-    get_property_summary,
-    search_projects_by_criteria,
-    get_project_statistics,
-    get_project_amenities,
-    get_properties_by_group_id,
-    get_all_properties,
-    get_all_property_groups,
+    # search_properties_by_criteria,
+    # get_property_by_id,
+    # get_property_summary,
+    # search_projects_by_criteria,
+    # get_project_statistics,
+    # get_project_amenities,
+    # get_properties_by_group_id,
+    # get_all_properties,
+    # get_all_property_groups,
     # User preference management tools
     update_user_profile,
     update_property_preferences,

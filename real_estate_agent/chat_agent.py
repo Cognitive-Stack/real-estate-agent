@@ -9,10 +9,13 @@ import os
 import sys
 import asyncio
 import logging
+import json
 from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
 from autogen_agentchat.agents import AssistantAgent
+from autogen_agentchat.teams import RoundRobinGroupChat
+from autogen_agentchat.conditions import TextMentionTermination
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from autogen_agentchat.ui import Console
 from autogen_core.memory import ListMemory, MemoryContent, MemoryMimeType
@@ -108,6 +111,9 @@ class RealEstateChatAgent:
         
         # Load user preferences from JSON into memory
         asyncio.create_task(self._load_user_preferences_to_memory())
+        
+        # Load mock data into memory
+        asyncio.create_task(self._load_mock_data_to_memory())
         
         self.agent = self._create_agent()
     
@@ -217,6 +223,198 @@ class RealEstateChatAgent:
 
         except Exception as e:
             self.logger.error(f"Error loading default user preferences: {e}")
+    
+    async def _load_mock_data_to_memory(self) -> None:
+        """Load mock property groups and properties data into memory."""
+        try:
+            import json
+            
+            # Load mock property groups
+            property_groups_path = Path(__file__).parent.parent / "mock_data" / "mock_property_group_schema_data.json"
+            if property_groups_path.exists():
+                with open(property_groups_path, 'r', encoding='utf-8') as f:
+                    property_groups = json.load(f)
+                
+                # Add property groups to memory
+                for i, group in enumerate(property_groups[:5]):  # Load first 5 groups to avoid overwhelming memory
+                    group_summary = {
+                        "type": "property_group",
+                        "index": i,
+                        "location": self._extract_location_from_group(group),
+                        "amenities": self._extract_amenities_from_group(group),
+                        "developer": self._extract_developer_from_group(group),
+                        "project_name": self._extract_project_name_from_group(group)
+                    }
+                    
+                    memory_content = MemoryContent(
+                        content=f"Property Group {i+1}: {json.dumps(group_summary, ensure_ascii=False)}",
+                        mime_type=MemoryMimeType.TEXT,
+                        metadata={"category": "property_groups", "type": "mock_data", "priority": "medium", "group_index": i}
+                    )
+                    await self.memory.add(memory_content)
+                
+                self.logger.info(f"Loaded {min(5, len(property_groups))} property groups into memory")
+            
+            # Load mock properties
+            properties_path = Path(__file__).parent.parent / "mock_data" / "mock_property_schema_data.json"
+            if properties_path.exists():
+                with open(properties_path, 'r', encoding='utf-8') as f:
+                    properties = json.load(f)
+                
+                # Add properties to memory
+                for i, property_data in enumerate(properties[:10]):  # Load first 10 properties
+                    property_summary = {
+                        "type": "property",
+                        "unitId": property_data.get("unitId"),
+                        "groupIds": property_data.get("groupIds", []),
+                        "description": property_data.get("description", ""),
+                        "bedrooms": self._extract_bedrooms_from_property(property_data),
+                        "bathrooms": self._extract_bathrooms_from_property(property_data),
+                        "area": self._extract_area_from_property(property_data),
+                        "price": self._extract_price_from_property(property_data),
+                        "has_balcony": self._extract_balcony_from_property(property_data),
+                        "furnished": self._extract_furnished_from_property(property_data)
+                    }
+                    
+                    memory_content = MemoryContent(
+                        content=f"Property {property_data.get('unitId', i+1)}: {json.dumps(property_summary, ensure_ascii=False)}",
+                        mime_type=MemoryMimeType.TEXT,
+                        metadata={"category": "properties", "type": "mock_data", "priority": "medium", "property_index": i}
+                    )
+                    await self.memory.add(memory_content)
+                
+                self.logger.info(f"Loaded {min(10, len(properties))} properties into memory")
+            
+            # Add summary information about available mock data
+            summary_content = MemoryContent(
+                content="Mock Data Summary: The agent has access to property groups and individual properties data including locations, amenities, pricing, and detailed specifications. This data can be used to provide realistic property recommendations and comparisons.",
+                mime_type=MemoryMimeType.TEXT,
+                metadata={"category": "mock_data_summary", "type": "system_info", "priority": "high"}
+            )
+            await self.memory.add(summary_content)
+            
+        except Exception as e:
+            self.logger.error(f"Error loading mock data into memory: {e}")
+    
+    def _extract_location_from_group(self, group: dict) -> str:
+        """Extract location information from property group data."""
+        try:
+            location_data = group.get("location_and_surrounding_amenities", {}).get("value", [])
+            for item in location_data:
+                if item.get("key") == "exact_location_on_map":
+                    coords = item.get("value", [])
+                    lat = next((c["value"] for c in coords if c.get("key") == "latitude"), None)
+                    lng = next((c["value"] for c in coords if c.get("key") == "longitude"), None)
+                    if lat and lng:
+                        return f"Coordinates: {lat}, {lng}"
+            return "Location data available"
+        except:
+            return "Unknown location"
+    
+    def _extract_amenities_from_group(self, group: dict) -> list:
+        """Extract amenities from property group data."""
+        try:
+            amenities = []
+            location_data = group.get("location_and_surrounding_amenities", {}).get("value", [])
+            for item in location_data:
+                if item.get("key") == "surrounding_amenities":
+                    amenity_list = item.get("value", [])
+                    for amenity in amenity_list:
+                        amenities.append(amenity.get("label", amenity.get("key", "")))
+            return amenities[:5]  # Return first 5 amenities
+        except:
+            return []
+    
+    def _extract_developer_from_group(self, group: dict) -> str:
+        """Extract developer information from property group data."""
+        try:
+            developer_data = group.get("developer_and_contractor", {}).get("value", [])
+            for item in developer_data:
+                if item.get("key") == "developer_name":
+                    return item.get("value", "Unknown developer")
+            return "Developer information available"
+        except:
+            return "Unknown developer"
+    
+    def _extract_project_name_from_group(self, group: dict) -> str:
+        """Extract project name from property group data."""
+        try:
+            project_data = group.get("project_information", {}).get("value", [])
+            for item in project_data:
+                if item.get("key") == "project_name":
+                    return item.get("value", "Unknown project")
+            return "Project information available"
+        except:
+            return "Unknown project"
+    
+    def _extract_bedrooms_from_property(self, property_data: dict) -> int:
+        """Extract number of bedrooms from property data."""
+        try:
+            physical_features = property_data.get("data", {}).get("physical_features", {}).get("value", [])
+            for feature in physical_features:
+                if feature.get("key") == "number_of_bedrooms":
+                    return feature.get("value", 0)
+            return 0
+        except:
+            return 0
+    
+    def _extract_bathrooms_from_property(self, property_data: dict) -> int:
+        """Extract number of bathrooms from property data."""
+        try:
+            physical_features = property_data.get("data", {}).get("physical_features", {}).get("value", [])
+            for feature in physical_features:
+                if feature.get("key") == "number_of_bathrooms":
+                    return feature.get("value", 0)
+            return 0
+        except:
+            return 0
+    
+    def _extract_area_from_property(self, property_data: dict) -> float:
+        """Extract area from property data."""
+        try:
+            physical_features = property_data.get("data", {}).get("physical_features", {}).get("value", [])
+            for feature in physical_features:
+                if feature.get("key") == "gross_floor_area":
+                    return feature.get("value", 0.0)
+            return 0.0
+        except:
+            return 0.0
+    
+    def _extract_price_from_property(self, property_data: dict) -> dict:
+        """Extract price information from property data."""
+        try:
+            pricing_data = property_data.get("data", {}).get("pricing_and_financial_information", {}).get("value", [])
+            for item in pricing_data:
+                if item.get("key") == "listing_price":
+                    return {
+                        "amount": item.get("value", 0),
+                        "currency": item.get("unit", "VND")
+                    }
+            return {"amount": 0, "currency": "VND"}
+        except:
+            return {"amount": 0, "currency": "VND"}
+    
+    def _extract_balcony_from_property(self, property_data: dict) -> bool:
+        """Extract balcony information from property data."""
+        try:
+            physical_features = property_data.get("data", {}).get("physical_features", {}).get("value", [])
+            for feature in physical_features:
+                if feature.get("key") == "has_balcony_or_logia":
+                    return feature.get("value", False)
+            return False
+        except:
+            return False
+    
+    def _extract_furnished_from_property(self, property_data: dict) -> bool:
+        """Extract furnished status from property data."""
+        try:
+            amenities_data = property_data.get("data", {}).get("amenities_and_features", {}).get("value", [])
+            for item in amenities_data:
+                if "furniture" in item.get("key", "").lower() or "furnished" in item.get("key", "").lower():
+                    return item.get("value", False)
+            return False
+        except:
+            return False
     
     async def add_user_preference(self, preference: str, category: str = "general") -> None:
         """
@@ -366,12 +564,31 @@ class RealEstateChatAgent:
         - Examples that DO need property search: "find properties in Bangkok", "search for contractors", "show me developers", "look for apartments under $500k"
         - Examples that need preference updates: "I'm looking for a 2-bedroom apartment", "My budget is 3 million", "I prefer locations near schools"
         
+        PROPERTY SEARCH BEST PRACTICES:
+        - When users specify "2-bedroom", use number_of_bedrooms=2 (exact match)
+        - For budget "under 3 billion VND", use max_price=3000000000
+        - For budget "2-4 billion VND", use min_price=2000000000, max_price=4000000000
+        - For size "at least 80 sqm", use min_area=80.0
+        - For size "50-100 sqm", use min_area=50.0, max_area=100.0
+        - Only set has_balcony=True if user specifically mentions balcony/terrace
+        - Only set furnished=True if user specifically mentions furnished
+        - Vietnamese prices are typically in billions (e.g., "3 tỷ" = 3000000000)
+        - Always call add_search_to_history() after performing property searches
+        
         MEMORY USAGE:
         - You have access to conversation history and user preferences through your memory system
         - User preferences are automatically saved to a JSON file for persistence across sessions
         - Use this information to provide personalized responses and remember user preferences
         - When users mention preferences, update them immediately using the preference management functions
         - Always prioritize user-specified preferences over default assumptions
+        
+        MOCK DATA AVAILABILITY:
+        - You have access to mock property groups and individual properties loaded in your memory
+        - This includes detailed property information such as locations, amenities, pricing, developer details, and specifications
+        - Use this mock data to provide realistic examples, comparisons, and recommendations when discussing properties
+        - The mock data contains Vietnamese properties with detailed features like number of bedrooms, bathrooms, area, balconies, and pricing
+        - When users ask about property examples or need specific recommendations, reference this mock data to provide concrete examples
+        - Property groups contain location and amenity information while individual properties contain specific unit details
         
         For general real estate advice, market education, process explanations, or casual conversation, respond directly from your knowledge without using property search functions, but always consider user preferences when relevant and update preferences when mentioned.
         
@@ -381,21 +598,51 @@ class RealEstateChatAgent:
         Keep your responses conversational and easy to understand. Format property information clearly.
         """
 
+        critic_agent_message = """As a critic agent, your role is to objectively evaluate the response of real estate sales agents and provide clear, actionable suggestions for improvement. Please consider the following guidelines when reviewing agent replies:
+
+        Avoid repetitive responses: Do not repeat the same sentence or information multiple times. Encourage variety and clarity in communication.
+
+        Focus on our product’s strengths: Highlight the agent’s ability to showcase the great points of our product, but also point out any missed opportunities to address areas for improvement. Avoid exaggerated claims that "our product is the best"; instead, use specific, genuine strengths.
+
+        Do not elaborate on competitors: If the agent mentions brands other than ours, suggest removing or minimizing any detailed discussion or analysis about competitors.
+
+        Handle inappropriate or flirtatious customers with professionalism: If you notice customer messages that are inappropriate or flirtatious, check that the agent responds politely and sets boundaries (e.g., “Sorry, my boss would scold me; I’m only allowed to sell products.”).
+
+        Stop after client silence: If the client is unresponsive for 2-3 consecutive messages, recommend that the agent stop messaging and avoid unnecessary follow-ups.
+
+        Redirect off-topic conversations: If the client attempts to discuss topics unrelated to real estate, ensure that the agent gently guides the conversation back to the main topic.
+
+        For each agent response you review, provide:
+
+        A brief evaluation of adherence to the above points.
+
+        Specific, actionable suggestions for improvement.
+
+        Highlight examples from the agent’s reply where relevant.
+        """
+
         self.logger.debug("System message created for agent")
         
         # Create the assistant agent with function calling tools and memory
-        agent = AssistantAgent(
+        real_estate_agent = AssistantAgent(
             name="RealEstateAgent",
             system_message=system_message,
             model_client=self.model_client,
             tools=REAL_ESTATE_TOOLS,
             memory=[self.memory],  # Add memory to the agent
-            reflect_on_tool_use=False, # Disable reflection to avoid unnecessary complexity
+            reflect_on_tool_use=True, # Disable reflection to avoid unnecessary complexity
             max_tool_iterations=10,  # Limit to 10 function calls per interaction
         )
-        
-        self.logger.info(f"AssistantAgent created with {len(REAL_ESTATE_TOOLS)} tools and memory integration")
-        return agent
+
+        critic_agent = AssistantAgent(
+            name="CriticAgent",
+            system_message=critic_agent_message,
+            model_client=self.model_client,
+        )
+
+        inner_termination = TextMentionTermination("APPROVE")
+        team = RoundRobinGroupChat([real_estate_agent, critic_agent], termination_condition=inner_termination, max_turns=3)
+        return team
     
     async def chat(self, message: str) -> str:
         """
@@ -475,52 +722,10 @@ class RealEstateChatAgent:
     
     async def start_interactive_chat(self):
         """Start an interactive chat session in the terminal."""
-        self.logger.info("Starting interactive chat session")
-        
-        print("🏠 Real Estate Chat Agent with Memory & Streaming")
-        print("=" * 60)
-        print("Welcome! I'm your real estate assistant with memory capabilities.")
-        print("I'll remember your preferences and conversation history to provide personalized assistance!")
-        print("� Your preferences are automatically saved to 'user_preferences.json' file.")
-        print("🤖 I can automatically update your preferences based on our conversation!")
-        print("�💡 Tip: Messages will stream in real-time as they're generated.")
-        print("Type 'quit', 'exit', or 'bye' to end the conversation.")
-        print("Type 'memory' to see what I remember about our conversation.")
-        print("Type 'preferences' to see your current preferences.")
-        print("Type 'clear memory' to clear my memory.")
-        print("Type 'update preference [key] [value]' to update a specific preference.")
-        print("Logs are being saved to 'real_estate_agent.log' file.")
-        print(f"📁 Preferences file location: {self.preference_manager.preferences_file}")
-        print()
         
         while True:
             try:
-                user_input = input("You: ").strip()
-                
-                if user_input.lower() in ['quit', 'exit', 'bye', 'q']:
-                    self.logger.info("User ended the conversation")
-                    print("👋 Thank you for chatting! Have a great day!")
-                    break
-                
-                if user_input.lower() == 'memory':
-                    await self._show_memory_contents()
-                    continue
-                
-                if user_input.lower() == 'preferences':
-                    await self._show_user_preferences()
-                    continue
-                
-                if user_input.lower() == 'clear memory':
-                    await self.clear_memory()
-                    # Reload preferences from JSON file after clearing memory
-                    await self._load_user_preferences_to_memory()
-                    print("🧠 Memory cleared successfully! Preferences reloaded from JSON file.")
-                    continue
-                
-                if user_input.lower().startswith('update preference'):
-                    await self._handle_preference_update(user_input)
-                    continue
-                
+                user_input = input("💬 You: ").strip()            
                 if not user_input:
                     print("Please enter a message or type 'quit' to exit.")
                     continue
@@ -540,111 +745,6 @@ class RealEstateChatAgent:
                 print(f"❌ Error: {e}")
                 print("Please try again or type 'quit' to exit.\n")
     
-    async def _show_memory_contents(self):
-        """Display current memory contents to the user."""
-        try:
-            # Query all memories (empty query typically returns all in ListMemory)
-            memories = await self.memory.query("")
-            
-            if not memories:
-                print("🧠 Memory is currently empty.")
-                return
-            
-            print("🧠 Current Memory Contents:")
-            print("=" * 30)
-            
-            # Group memories by category
-            categories = {}
-            for memory in memories:
-                metadata = memory.metadata or {}
-                category = metadata.get('category', 'general')
-                if category not in categories:
-                    categories[category] = []
-                categories[category].append(memory)
-            
-            for category, items in categories.items():
-                print(f"\n📁 {category.title()}:")
-                for i, memory in enumerate(items, 1):
-                    content = memory.content[:100] + "..." if len(memory.content) > 100 else memory.content
-                    print(f"  {i}. {content}")
-            
-            print("=" * 30)
-            
-        except Exception as e:
-            self.logger.error(f"Error showing memory contents: {e}")
-            print(f"❌ Error retrieving memory contents: {e}")
-    
-    async def _show_user_preferences(self):
-        """Display current user preferences from JSON file."""
-        try:
-            # Get preferences directly from JSON file
-            json_preferences = self.preference_manager.get_preferences()
-            
-            if not json_preferences:
-                print("👤 No user preferences found in JSON file.")
-                return
-            
-            print("👤 Current User Preferences (from JSON file):")
-            print("=" * 50)
-            
-            # Show user profile
-            user_profile = json_preferences.get("user_profile", {})
-            if any(v for v in user_profile.values() if v not in [None, "", "Updated at:"]):
-                print("\n📋 User Profile:")
-                for key, value in user_profile.items():
-                    if value and key != "updated_at":
-                        print(f"  • {key.replace('_', ' ').title()}: {value}")
-                    elif key == "updated_at" and value:
-                        print(f"  • Last Updated: {value}")
-            
-            # Show property preferences
-            property_prefs = json_preferences.get("property_preferences", {})
-            if any(v for v in property_prefs.values() if v not in [None, [], "", "Updated at:"]):
-                print("\n🏠 Property Preferences:")
-                for key, value in property_prefs.items():
-                    if value and key != "updated_at":
-                        if isinstance(value, list) and value:
-                            print(f"  • {key.replace('_', ' ').title()}: {', '.join(map(str, value))}")
-                        elif not isinstance(value, list):
-                            print(f"  • {key.replace('_', ' ').title()}: {value}")
-                    elif key == "updated_at" and value:
-                        print(f"  • Last Updated: {value}")
-            
-            # Show search history count
-            search_history = json_preferences.get("search_history", [])
-            if search_history:
-                print(f"\n🔍 Search History: {len(search_history)} searches recorded")
-            
-            # Show recent interests
-            context = json_preferences.get("conversation_context", {})
-            recent_interests = context.get("recent_interests", [])
-            if recent_interests:
-                print(f"\n💭 Recent Interests: {', '.join(recent_interests)}")
-            
-            print("=" * 50)
-            print(f"📁 Preferences saved in: {self.preference_manager.preferences_file}")
-            
-        except Exception as e:
-            self.logger.error(f"Error showing user preferences: {e}")
-            print(f"❌ Error retrieving user preferences: {e}")
-    
-    async def _handle_preference_update(self, user_input: str):
-        """Handle preference update commands."""
-        try:
-            # Parse the update command: "update preference [key] [value]"
-            parts = user_input.split(' ', 3)
-            if len(parts) < 4:
-                print("❌ Invalid format. Use: update preference [key] [value]")
-                print("Example: update preference budget 3000000")
-                return
-            
-            _, _, key, value = parts
-            await self.update_user_preference(key, value, "updated")
-            print(f"✅ Updated preference '{key}' to '{value}'")
-            
-        except Exception as e:
-            self.logger.error(f"Error handling preference update: {e}")
-            print(f"❌ Error updating preference: {e}")
     
     async def close(self):
         """Close the model client connection and clean up memory."""
