@@ -121,7 +121,6 @@ class RealEstateDataTools:
                 - min_price: float (minimum price)
                 - max_price: float (maximum price)
                 - has_balcony: bool
-                - furnished: bool
                 
         Returns:
             List of property data dictionaries matching the criteria

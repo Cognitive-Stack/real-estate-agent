@@ -1,0 +1,21 @@
+{
+  "user_profile": {
+    "name": "",
+    "phone_number": "",
+    "age": null,
+    "created_at": "2025-07-29T14:40:06.780136",
+    "updated_at": "2025-07-29T14:40:06.780156"
+  },
+  "property_preferences": {
+    "type": "",
+    "location": "",
+    "price_range": "",
+    "bedrooms": null,
+    "amenities": []
+  },
+  "search_history": [],
+  "conversation_preferences": {
+    "language": "vietnamese",
+    "communication_style": "professional"
+  }
+}
