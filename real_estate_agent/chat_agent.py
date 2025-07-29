@@ -13,67 +13,13 @@ from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
 from autogen_agentchat.agents import AssistantAgent
-from autogen_ext.models.openai import OpenAIChatCompletionClient
+from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
 from autogen_agentchat.ui import Console
 from autogen_core.memory import ListMemory, MemoryContent, MemoryMimeType
-from tools_v1 import REAL_ESTATE_TOOLS
-
-# Import our custom logging configuration
-import sys
-sys.path.append('..')
-try:
-    from logging_config import setup_advanced_logging, add_autogen_highlights, suppress_mongodb_logs
-except ImportError:
-    # Fallback to basic logging if custom config is not available
-    def setup_advanced_logging(log_level="INFO", enable_file_logging=True):
-        logging.basicConfig(level=getattr(logging, log_level.upper()))
-    def add_autogen_highlights():
-        pass
-    def suppress_mongodb_logs():
-        pass
+from .tools_v1 import REAL_ESTATE_TOOLS
 
 # Load environment variables
 load_dotenv()
-
-
-def setup_logging(level: str = "INFO", enable_file_logging: bool = True) -> None:
-    """
-    Setup logging configuration for AutoGen and the application.
-    
-    Args:
-        level: Logging level (DEBUG, INFO, WARNING, ERROR)
-        enable_file_logging: Whether to enable file logging
-    """
-    try:
-        # Use advanced logging configuration
-        setup_advanced_logging(level, enable_file_logging)
-        add_autogen_highlights()
-        # Explicitly suppress MongoDB logs again to be sure
-        suppress_mongodb_logs()
-    except Exception as e:
-        # Fallback to basic logging
-        logging.basicConfig(
-            level=getattr(logging, level.upper()),
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.StreamHandler(),
-                logging.FileHandler('real_estate_agent.log') if enable_file_logging else logging.NullHandler()
-            ]
-        )
-        print(f"⚠️  Using basic logging configuration due to: {e}")
-    
-    # Configure specific loggers
-    loggers_config = {
-        "autogen": level,
-        "openai": "WARNING",  # Reduce API noise
-        "httpx": "WARNING",   # Reduce HTTP request noise
-        "real_estate_agent": level
-    }
-    
-    for logger_name, log_level in loggers_config.items():
-        logger = logging.getLogger(logger_name)
-        logger.setLevel(getattr(logging, log_level.upper()))
-
 
 class RealEstateChatAgent:
     """A simple real estate chat agent using AutoGen."""
@@ -84,21 +30,34 @@ class RealEstateChatAgent:
         
         Args:
             api_key: OpenAI API key. If not provided, will look for OPENAI_API_KEY in environment.
+                    For Azure OpenAI, use AZURE_OPENAI_API_KEY environment variable.
             log_level: Logging level for AutoGen and application logs (DEBUG, INFO, WARNING, ERROR)
             enable_file_logging: Whether to enable file logging
         """
         # Setup logging first
-        setup_logging(log_level, enable_file_logging)
         self.logger = logging.getLogger("real_estate_agent.chat_agent")
         
-        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
-        if not self.api_key:
-            raise ValueError("OpenAI API key is required. Set OPENAI_API_KEY environment variable or pass api_key parameter.")
+        # Check for Azure OpenAI configuration first
+        azure_openai_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+        azure_openai_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+        azure_openai_api_key = os.getenv("AZURE_OPENAI_API_KEY")
         
-        self.model_name = os.getenv("MODEL_NAME", "gpt-4o")
+        # If Azure OpenAI configuration is provided, use it
+        if azure_openai_deployment and azure_openai_endpoint and azure_openai_api_key:
+            self.logger.info("🚀 Initializing Real Estate Chat Agent with Azure OpenAI")
+            self.api_key = azure_openai_api_key
+            self.model_name = os.getenv("AZURE_OPENAI_MODEL", "gpt-4o")
+        else:
+            # Use standard OpenAI
+            self.logger.info("🚀 Initializing Real Estate Chat Agent with OpenAI")
+            self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+            if not self.api_key:
+                raise ValueError("API key is required. For OpenAI: Set OPENAI_API_KEY environment variable or pass api_key parameter. For Azure OpenAI: Set AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT, and AZURE_OPENAI_ENDPOINT environment variables.")
+            self.model_name = os.getenv("MODEL_NAME", "gpt-4o")
+        
         self.temperature = float(os.getenv("TEMPERATURE", "0.7"))
         
-        self.logger.info(f"🚀 Initializing Real Estate Chat Agent with model: {self.model_name}")
+        self.logger.info(f"Using model: {self.model_name}")
         
         
         # Initialize the model client and memory
@@ -110,14 +69,38 @@ class RealEstateChatAgent:
         
         self.agent = self._create_agent()
     
-    def _create_model_client(self) -> OpenAIChatCompletionClient:
-        """Create and configure the OpenAI model client."""
-        self.logger.info(f"Creating OpenAI model client with model: {self.model_name}, temperature: {self.temperature}")
-        return OpenAIChatCompletionClient(
-            model=self.model_name,
-            api_key=self.api_key,
-            temperature=self.temperature,
-        )
+    def _create_model_client(self):
+        """Create and configure the model client (OpenAI or Azure OpenAI)."""
+        # Check if Azure OpenAI configuration is available
+        azure_openai_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+        azure_openai_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+        azure_openai_api_key = os.getenv("AZURE_OPENAI_API_KEY")
+        
+        # If Azure OpenAI configuration is provided, use Azure OpenAI
+        if azure_openai_deployment and azure_openai_endpoint and azure_openai_api_key:
+            # Get Azure configuration from environment variables
+            azure_openai_model = os.getenv("AZURE_OPENAI_MODEL", "gpt-4o")
+            azure_openai_api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2024-06-01")
+            
+            self.logger.info(f"Creating Azure OpenAI model client with deployment: {azure_openai_deployment}, model: {azure_openai_model}, temperature: {self.temperature}")
+            
+            # Initialize Azure OpenAI client
+            return AzureOpenAIChatCompletionClient(
+                azure_deployment=azure_openai_deployment,
+                model=azure_openai_model,
+                api_version=azure_openai_api_version,
+                azure_endpoint=azure_openai_endpoint,
+                api_key=azure_openai_api_key,
+                temperature=self.temperature,
+            )
+        else:
+            # Use standard OpenAI
+            self.logger.info(f"Creating OpenAI model client with model: {self.model_name}, temperature: {self.temperature}")
+            return OpenAIChatCompletionClient(
+                model=self.model_name,
+                api_key=self.api_key,
+                temperature=self.temperature,
+            )
     
     def _create_memory(self) -> ListMemory:
         """Create and configure the ListMemory for the agent."""
@@ -147,8 +130,8 @@ class RealEstateChatAgent:
             }
 
             memory_content = MemoryContent(
-                content=f"User Profile: {default_profile}",
-                mime_type=MemoryMimeType.TEXT,
+                content=default_profile,
+                mime_type=MemoryMimeType.JSON,
                 metadata={"category": "user_profile", "type": "user_preference", "priority": "high"}
             )
             await self.memory.add(memory_content)
@@ -556,7 +539,7 @@ class RealEstateChatAgent:
 async def main():
     """Main function to run the chat agent."""
     # Setup basic logging before creating the agent
-    setup_logging("INFO", enable_file_logging=True)
+    # setup_logging("INFO", enable_file_logging=True)
     logger = logging.getLogger("real_estate_agent.main")
     
     agent = None

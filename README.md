@@ -1,258 +1,126 @@
-# Real Estate Chat Agent with Function Calling & Memory
+# Real Estate Chat Agent
 
-A sophisticated real estate chat agent built with Microsoft AutoGen that uses function calling to query property and project data from a comprehensive database, with **ListMemory** integration for personalized user experiences.
+A simple chat agent using AutoGen for real estate assistance.
 
 ## Features
 
-### 🧠 Memory System (NEW!)
+- Interactive chat interface for real estate queries
+- Memory management for user preferences and conversation context
+- Support for both OpenAI and Azure OpenAI
+- Real estate specific tools and knowledge
 
-The agent now includes **ListMemory** functionality that provides:
+## Installation
 
-- **User Preference Storage**: Automatically detects and stores user preferences (budget, location, property type, investment goals)
-- **Conversation Context**: Maintains conversation history for better context awareness
-- **Personalized Responses**: Uses stored memories to provide tailored recommendations
-- **Memory Management**: Users can view, query, and clear stored memories
-- **Persistent Context**: Remembers preferences across the conversation session
-
-#### Memory Categories:
-- **Budget**: Price ranges, affordability preferences
-- **Location**: Area preferences, proximity requirements
-- **Property Type**: Condo, house, villa, commercial preferences
-- **Investment**: ROI expectations, rental yield preferences
-- **Conversation Context**: Previous questions and responses
-
-### Function Calling Capabilities
-
-The agent has access to the following function calling tools:
-
-- **Property Search**: Search properties by bedrooms, bathrooms, area, balcony, furnished status
-- **Property Details**: Get detailed information and summaries for specific properties
-- **Project Search**: Search real estate projects by developer, location, status, market segment
-- **Statistics**: Get comprehensive statistics about properties and projects
-- **Amenities**: Retrieve internal and surrounding amenities for projects
-- **Group Operations**: Get properties belonging to specific project groups
-
-### Available Functions
-
-1. `search_properties_by_criteria()` - Search properties with filters
-2. `get_property_by_id()` - Get specific property details
-3. `get_property_summary()` - Get human-readable property summary
-4. `search_projects_by_criteria()` - Search projects with filters
-5. `get_project_statistics()` - Get database statistics
-6. `get_project_amenities()` - Get project amenities
-7. `get_properties_by_group_id()` - Get properties in a group
-8. `get_all_properties()` - Get all properties
-9. `get_all_property_groups()` - Get all project groups
-
-## Setup
-
-1. **Install Dependencies**:
+1. Clone the repository
+2. Install dependencies using uv:
    ```bash
-   pip install poetry
-   poetry install
+   make setup-env
    ```
 
-2. **Set Environment Variables**:
-   Create a `.env` file with:
-   ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   MODEL_NAME=gpt-4o  # optional, defaults to gpt-4o
-   TEMPERATURE=0.7    # optional, defaults to 0.7
-   ```
+## Configuration
 
-3. **Verify Data**:
-   The mock data files should be present in `mock_data/`:
-   - `mock_property_schema_data.json`
-   - `mock_property_group_schema_data.json`
+### OpenAI Configuration
+
+Set the following environment variables for OpenAI:
+
+```bash
+export OPENAI_API_KEY="your-openai-api-key"
+export MODEL_NAME="gpt-4o"  # Optional, defaults to gpt-4o
+export TEMPERATURE="0.7"    # Optional, defaults to 0.7
+```
+
+### Azure OpenAI Configuration
+
+Set the following environment variables for Azure OpenAI:
+
+```bash
+export AZURE_OPENAI_API_KEY="your-azure-openai-api-key"
+export AZURE_OPENAI_DEPLOYMENT="your-deployment-name"
+export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com/"
+export AZURE_OPENAI_MODEL="gpt-4o"           # Optional, defaults to gpt-4o
+export AZURE_OPENAI_API_VERSION="2024-06-01" # Optional, defaults to 2024-06-01
+export TEMPERATURE="0.7"                     # Optional, defaults to 0.7
+```
+
+**Note**: The agent will automatically detect which configuration to use based on the environment variables. If Azure OpenAI variables are set, it will use Azure OpenAI. Otherwise, it will fall back to standard OpenAI.
 
 ## Usage
 
-### Memory Demo (NEW!)
-
-Test the new memory functionality:
+### Using the Makefile
 
 ```bash
-cd real_estate_agent
-python3 memory_demo.py
+# Setup development environment
+make setup-env
+
+# Run the application
+make run
+
+# Add a new package
+make add PACKAGE=requests
+
+# Add a development package
+make add-dev PACKAGE=pytest
+
+# Run tests
+make test
+
+# Format code
+make format
+
+# Clean up
+make clean
 ```
 
-This demo shows:
-1. How the agent stores user preferences automatically
-2. How memory influences future responses
-3. Memory management commands (view, clear)
-4. Interactive testing of memory features
-
-### Interactive Chat with Memory
-
-The enhanced chat interface now includes memory commands:
-
-```bash
-cd real_estate_agent
-python3 chat_agent.py
-```
-
-**New Commands:**
-- Type `memory` to view stored memories
-- Type `clear memory` to clear all memories
-- The agent automatically stores preferences mentioned in conversation
-
-### Test Function Calling Tools
-
-First, test that all function calling tools work correctly:
-
-```bash
-python3 test_function_calling.py
-```
-
-This will test all the individual function calling tools and show their results.
-
-### Run the Function Calling Demo
-
-Run the demo script to see function calling in action:
-
-```bash
-python3 demo_function_calling.py
-```
-
-This will:
-1. Test various queries that trigger function calls
-2. Enter interactive mode for testing
-
-### Programmatic Usage
+### Direct Usage
 
 ```python
-import asyncio
 from real_estate_agent.chat_agent import RealEstateChatAgent
 
-async def main():
-    agent = RealEstateChatAgent()
-    
-    # Add user preferences to memory
-    await agent.add_user_preference("Budget up to 5 million baht", "budget")
-    await agent.add_user_preference("Prefers condos in Bangkok", "location")
-    
-    # The agent will use both memory context and function calling
-    response = await agent.chat("Find me some properties that match my preferences")
-    print(response)
-    
-    # Check what's stored in memory
-    memories = await agent.query_memory("")
-    print(f"Stored {len(memories)} memories")
-    
-    await agent.close()
+# Initialize the agent
+agent = RealEstateChatAgent()
 
-asyncio.run(main())
+# Start interactive chat
+await agent.start_interactive_chat()
 ```
-
-## Example Interactions
-
-### Memory-Enhanced Responses
-
-**Initial conversation:**
-```
-User: "I'm looking for a 2-bedroom condo in Bangkok with a budget of 5 million baht"
-Agent: [Stores budget, property type, and location preferences, then responds with relevant information]
-```
-
-**Follow-up conversation:**
-```
-User: "What should I look for in a good investment property?"
-Agent: [Uses stored preferences to provide personalized advice for condos in Bangkok within the budget]
-```
-
-### Function Calling Queries
-
-- "How many properties are in your database?"
-- "Find all 2-bedroom properties"
-- "Search for properties with balconies"
-- "Show me Vinhomes projects"
-- "What are the project statistics?"
-- "Find properties between 50-100 square meters"
-- "Tell me about property_001"
-- "What amenities does the first project have?"
-
-## Memory System Details
-
-## Memory System Details
-
-### Automatic Preference Detection
-
-The agent automatically detects and stores preferences from user messages:
-
-- **Budget keywords**: "budget", "price", "cost", "afford", "$", "baht", "million"
-- **Location keywords**: "bangkok", "location", "area", "district", "near", "close to"
-- **Property type keywords**: "condo", "house", "apartment", "villa", "townhouse", "commercial"
-- **Investment keywords**: "invest", "investment", "roi", "return", "yield", "rental"
-
-### Memory Operations
-
-```python
-# Add user preference
-await agent.add_user_preference("Prefers properties near BTS stations", "location")
-
-# Add conversation context
-await agent.add_conversation_context("User asked about investment strategies", "investment_query")
-
-# Query memory
-results = await agent.query_memory("budget")
-
-# Clear all memory
-await agent.clear_memory()
-```
-
-### Memory Structure
-
-Each memory item contains:
-- **Content**: The actual text/information stored
-- **MIME Type**: Text format (MemoryMimeType.TEXT)
-- **Metadata**: Category, type, and other contextual information
-
-## Function Calling Architecture
-
-The function calling system works as follows:
-
-1. **Tools Definition**: Functions are defined in `tools.py` with proper type annotations using `Annotated`
-2. **Agent Integration**: The AutoGen agent is configured with the `tools` parameter
-3. **Automatic Invocation**: When users ask questions, the LLM automatically determines which functions to call
-4. **Data Retrieval**: Functions query the mock data and return structured results
-5. **Response Generation**: The agent uses the function results to generate natural language responses
-
-## Mock Data Structure
-
-The agent works with two types of data:
-
-- **Properties** (`mock_property_schema_data.json`): Individual property units with features like bedrooms, bathrooms, area, price
-- **Property Groups** (`mock_property_group_schema_data.json`): Real estate projects with developer info, amenities, location data
 
 ## Development
 
-### Adding New Functions
+### Available Make Commands
 
-To add new function calling capabilities:
+- `make help` - Show all available commands
+- `make setup-env` - Setup development environment
+- `make install` - Install production dependencies
+- `make install-dev` - Install development dependencies
+- `make add PACKAGE=name` - Add a new package
+- `make add-dev PACKAGE=name` - Add a development package
+- `make remove PACKAGE=name` - Remove a package
+- `make update` - Update all dependencies
+- `make run` - Run the application
+- `make test` - Run tests
+- `make lint` - Run linting
+- `make format` - Format code
+- `make clean` - Clean Python cache files
+- `make clean-all` - Clean everything including virtual environment
 
-1. Define the function in `tools.py` with proper type annotations
-2. Add the function to the `REAL_ESTATE_TOOLS` list
-3. The agent will automatically have access to the new function
+## Project Structure
 
-### Testing
-
-Run the test suite to verify all functions work:
-
-```bash
-python3 test_function_calling.py
+```
+real-estate-agent/
+├── real_estate_agent/
+│   ├── __init__.py
+│   ├── chat_agent.py      # Main chat agent implementation
+│   └── tools_v1.py        # Real estate tools
+├── mock_data/             # Mock data for testing
+├── pyproject.toml         # Project configuration
+├── Makefile              # Build and development commands
+└── README.md             # This file
 ```
 
-## Requirements
+## Contributing
 
-- Python 3.8+
-- OpenAI API key
-- Dependencies listed in `pyproject.toml`
-
-## Architecture
-
-- **Chat Agent** (`chat_agent.py`): Main agent using AutoGen with function calling
-- **Tools** (`tools.py`): Data access layer and function calling definitions
-- **Mock Data**: JSON files containing property and project data
-- **Demos**: Example scripts showing function calling capabilities
-
-The agent uses Microsoft's AutoGen framework for conversation management and automatically invokes the appropriate functions based on user queries, providing a seamless experience for real estate information retrieval.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests: `make test`
+5. Format code: `make format`
+6. Submit a pull request
