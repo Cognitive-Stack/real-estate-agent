@@ -2,20 +2,34 @@
   "user_profile": {
     "name": "",
     "phone_number": "",
+    "email": "",
     "age": null,
-    "created_at": "2025-07-29T14:40:06.780136",
-    "updated_at": "2025-07-29T14:40:06.780156"
+    "created_at": "2025-07-29T15:05:29.229598",
+    "updated_at": "2025-07-29T15:07:59.478966"
   },
   "property_preferences": {
-    "type": "",
-    "location": "",
-    "price_range": "",
-    "bedrooms": null,
-    "amenities": []
+    "property_type": [
+      "chung cư"
+    ],
+    "budget_min": null,
+    "budget_max": 4000000000.0,
+    "currency": "VND",
+    "locations": [
+      "quận 9"
+    ],
+    "bedrooms_min": null,
+    "bedrooms_max": null,
+    "bathrooms_min": null,
+    "size_min_sqm": null,
+    "size_max_sqm": null,
+    "must_have_amenities": [],
+    "nice_to_have_amenities": [],
+    "updated_at": "2025-07-29T15:07:59.478959"
   },
   "search_history": [],
-  "conversation_preferences": {
-    "language": "vietnamese",
-    "communication_style": "professional"
+  "conversation_context": {
+    "last_search_criteria": {},
+    "recent_interests": [],
+    "updated_at": "2025-07-29T15:05:29.229607"
   }
 }
