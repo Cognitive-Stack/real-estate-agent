@@ -1,0 +1,182 @@
+[
+  {
+    "image_name": "TX20-153.jpg",
+    "product_code": "TX20-153",
+    "total_changes": 5,
+    "significant_changes": 3,
+    "field_changes": [
+      {
+        "field_name": "project_branding",
+        "old_value": "VINHOMES GREEN CITY - ALPHAREAL",
+        "new_value": "VINHOMES GREEN CITY, ALPHAREAL",
+        "change_type": "minor textual change",
+        "semantic_explanation": "Sự thay đổi dấu nối '-' sang dấu phẩy ',' giữa hai phần 'VINHOMES GREEN CITY' và 'ALPHAREAL' chỉ là sự khác biệt về cách ghi chép, không làm thay đổi nội dung hay bản chất thông tin thương hiệu dự án.",
+        "confidence": 0.99
+      },
+      {
+        "field_name": "unit_location_map",
+        "old_value": "Căn TX20-153 thuộc phân khu The Forest, được đánh dấu trên bản đồ vị trí gần công viên nội khu và các tuyến phố Trung Hoa, Nhật Bản trong khu vực.",
+        "new_value": "Đơn vị TX20-153 nằm trong PHÂN KHU THE FOREST, đánh dấu vị trí rõ trên bản đồ, gần các tiện ích như tuyến phố Trung Hoa và Wellness Park.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới nhấn mạnh vị trí gần 'Wellness Park' thay vì tổng quát là các tuyến phố Nhật Bản; đồng thời từ 'căn' chuyển thành 'đơn vị' và có chút khác biệt trong cách mô tả. Thay đổi này làm nổi bật tiện ích sức khỏe cụ thể, có thể ảnh hưởng đến yếu tố thu hút khách hàng thích phong cách sống lành mạnh.",
+        "confidence": 0.95
+      },
+      {
+        "field_name": "project_masterplan",
+        "old_value": "Dự án Vinhomes Green City có bố cục phân khu rõ ràng, với các công viên lớn, tuyến phố thương mại và khu nhà đa dạng. Căn TX20-153 nằm ở vị trí thuận tiện, gần các tiện ích cảnh quan và trung tâm thương mại.",
+        "new_value": "Dự án được chia thành các phân khu chủ đạo gồm THE FOREST, THE SWAN LAKE, THE ISLAND và THE SUNRISE với nhiều công viên, tiện ích nội khu nổi bật. Vị trí sản phẩm nằm gần công viên nội khu và các khu phố văn hóa phong cách Trung Hoa, Nhật Bản.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Phiên bản mới cụ thể hơn về tên các phân khu và nhấn mạnh đến đặc trưng văn hóa các khu phố (Trung Hoa, Nhật Bản) cùng công viên nội khu, trong khi bản gốc tập trung vào mô tả tổng quát cảnh quan và tiện ích thương mại. Sự chi tiết này có thể làm tăng tính hấp dẫn trong marketing nhắm đến khách hàng quan tâm văn hóa và trải nghiệm đặc sắc.",
+        "confidence": 0.96
+      },
+      {
+        "field_name": "lifestyle_visuals",
+        "old_value": "Không gian sống gần gũi thiên nhiên với công viên xanh, cảnh quan hồ nước, kết hợp không gian thương mại sầm uất tạo môi trường sống hiện đại và tiện nghi.",
+        "new_value": "Hình ảnh thể hiện khu công viên xanh tươi, không gian sống hiện đại cùng các khu phố thương mại đặc sắc như khu phố Trung Hoa và khu phố Nhật Bản.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới tập trung khái quát về công viên xanh và các khu phố thương mại đặc sắc theo phong cách văn hóa, bỏ chi tiết cảnh quan hồ nước và mô tả thương mại sầm uất. Thay đổi này có thể làm giảm phần mô tả về cảnh quan mặt nước nhưng tăng sự nhấn mạnh vào đặc trưng văn hóa, ảnh hưởng tới hướng tiếp thị dự án.",
+        "confidence": 0.94
+      },
+      {
+        "field_name": "confidence_score",
+        "old_value": "0.99",
+        "new_value": "0.98",
+        "change_type": "minor numerical change",
+        "semantic_explanation": "Chỉ số độ tin cậy của dữ liệu trích xuất giảm nhẹ từ 0.99 xuống 0.98, mức giảm không đáng kể và không ảnh hưởng đến chất lượng tổng thể của dữ liệu.",
+        "confidence": 1.0
+      }
+    ],
+    "overall_assessment": "Các thay đổi trong dữ liệu chủ yếu nằm ở phần mô tả chi tiết về vị trí, phân khu và hình ảnh lối sống của sản phẩm. Những thay đổi này thể hiện sự tinh chỉnh trong nội dung marketing nhằm nhấn mạnh yếu tố văn hóa và tiện ích sức khỏe (Wellness Park). Dữ liệu định lượng như diện tích, giá cả, hướng nhà không thay đổi, đây là những yếu tố then chốt trong định giá và kinh doanh bất động sản.",
+    "recommendation": "Chấp thuận dữ liệu trích xuất mới vì các thay đổi là hợp lý, mang tính bổ sung chi tiết mang lại lợi thế marketing và không ảnh hưởng đến các yếu tố định giá cốt lõi.",
+    "confidence_score": 0.97
+  },
+  {
+    "image_name": "TX18-183.jpg",
+    "product_code": "TX18-183",
+    "total_changes": 4,
+    "significant_changes": 2,
+    "field_changes": [
+      {
+        "field_name": "project_branding",
+        "old_value": "VINHOMES GREEN CITY - ALPHAREAL",
+        "new_value": "VINHOMES GREEN CITY, ALPHAREAL",
+        "change_type": "minor textual change",
+        "semantic_explanation": "Thay đổi dấu nối '-' thành dấu phẩy ',' giữa 'VINHOMES GREEN CITY' và 'ALPHAREAL' không làm thay đổi ý nghĩa nội dung thương hiệu dự án, chỉ mang tính về cách trình bày.",
+        "confidence": 0.99
+      },
+      {
+        "field_name": "unit_location_map",
+        "old_value": "Căn TX18-183 nằm trong phân khu The Forest, gần các tuyến phố Trung Hoa và Nhật Bản, dễ dàng tiếp cận các khu vực tiện ích như công viên nội khu và Wellness Park.",
+        "new_value": "Đơn vị TX18-183 nằm trong PHÂN KHU THE FOREST, vị trí được đánh dấu rõ trên bản đồ phân khu, gần tuyến phố Trung Hoa và Nhật Bản.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới tập trung mô tả vị trí được đánh dấu rõ trên bản đồ và gần các tuyến phố Trung Hoa, Nhật Bản nhưng không nhắc đến tiếp cận công viên nội khu và Wellness Park như bản gốc. Sự thiếu nhắc đến trực tiếp các tiện ích này có thể làm giảm nổi bật tính thuận tiện tiện ích trong mô tả sản phẩm.",
+        "confidence": 0.95
+      },
+      {
+        "field_name": "project_masterplan",
+        "old_value": "Dự án có tổng thể phân khu bày trí khoa học với các công viên lớn, phân khu rõ ràng như The Forest, The Sunrise, The Swan Lake và The Island. Vị trí căn TX18-183 nằm gần các tiện ích trung tâm của phân khu The Forest.",
+        "new_value": "Dự án tổng thể gồm các phân khu THE FOREST, THE SWAN LAKE, THE ISLAND và THE SUNRISE với nhiều tiện ích như công viên, trường học, trung tâm thương mại. TX18-183 nằm gần Wellness Park và các tiện ích công viên nội khu.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Phiên bản mới bổ sung chi tiết về tiện ích đa dạng (trường học, trung tâm thương mại) và nhấn mạnh vị trí gần Wellness Park cùng công viên nội khu, trong khi bản gốc chủ yếu nhấn mạnh bố trí phân khu khoa học và vị trí gần tiện ích trung tâm. Sự bổ sung này cải thiện độ hấp dẫn trong mô tả tiện ích, góp phần tăng giá trị marketing.",
+        "confidence": 0.96
+      },
+      {
+        "field_name": "lifestyle_visuals",
+        "old_value": "Hình ảnh hiện đại với cảnh quan xanh mát, bao gồm khu phố Trung Hoa và Nhật Bản cùng các công viên lớn tạo không gian sống chất lượng và thân thiện.",
+        "new_value": "Hình ảnh khu công viên xanh mát và các khu phố thương mại theo phong cách Trung Hoa và Nhật Bản thể hiện môi trường sống đẳng cấp và hiện đại.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới nhấn mạnh yếu tố khu phố thương mại và môi trường sống đẳng cấp, còn bản gốc tập trung vào cảnh quan xanh và không gian sống thân thiện. Sự khác biệt này có thể ảnh hưởng tích cực tới nhóm khách hàng tìm kiếm phong cách sống hiện đại, sang trọng hấp dẫn hơn.",
+        "confidence": 0.94
+      }
+    ],
+    "overall_assessment": "Những thay đổi chủ yếu tập trung vào mô tả tiện ích và phong cách sống của sản phẩm. Phiên bản trích xuất mới thể hiện sự tập trung vào vị trí trên bản đồ và nhấn mạnh các khu phố thương mại theo phong cách văn hóa xen lẫn tính đẳng cấp hiện đại. Mặc dù thiếu chi tiết nhấn mạnh về tiếp cận công viên nội khu và Wellness Park so với bản gốc, nhưng việc bổ sung chi tiết thương mại và hình ảnh môi trường sống sang trọng vẫn đem lại giá trị marketing đáng kể. Các thông tin quan trọng về giá cả, diện tích, hướng nhà không thay đổi, đảm bảo duy trì giá trị định giá và kinh doanh ổn định.",
+    "recommendation": "Chấp thuận dữ liệu mới do các chỉnh sửa mang tính bổ sung và làm rõ điểm mạnh sản phẩm, không làm ảnh hưởng tiêu cực tới yếu tố định giá hay hoạt động kinh doanh.",
+    "confidence_score": 0.96
+  },
+  {
+    "image_name": "BM8-40.jpg",
+    "product_code": "BM8-40",
+    "total_changes": 4,
+    "significant_changes": 3,
+    "field_changes": [
+      {
+        "field_name": "unit_location_map",
+        "old_value": "Vị trí căn BM8-40 nằm trong phân khu 5 The Sunrise với vị trí gần RETREAT PARK, THE POP ART PARK cùng các tiện ích xung quanh như công viên nội khu và các khu tiện ích thể thao.",
+        "new_value": "Đơn vị BM8-40 nằm trong PHÂN KHU 5 THE SUNRISE, vị trí nổi bật gần các khu vực như Công viên nội khu 1, The Pop Art Park, và các điểm tiện ích như trường học, trung tâm thương mại Vincom Mega Mall.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới đổi tên 'RETREAT PARK' thành 'Công viên nội khu 1', thêm điểm tiện ích mới là trường học và trung tâm thương mại Vincom Mega Mall, trong khi bỏ không nhắc đến khu tiện ích thể thao. Sự thay đổi này làm nổi bật hơn các tiện ích giáo dục và thương mại, có thể thu hút khách hàng gia đình và nâng cao giá trị tiếp thị.",
+        "confidence": 0.96
+      },
+      {
+        "field_name": "project_masterplan",
+        "old_value": "Tổng thể dự án Vinhomes Green City có tổ chức rõ ràng với các phân khu nổi bật như The Sunrise, The Swan Lake và The Island. Căn BM8-40 thuộc phân khu The Sunrise, nằm gần khu hồ trung tâm, tiếp giáp các công viên nội khu và khu vực tiện ích xã hội đa dạng.",
+        "new_value": "Dự án tổng thể gồm nhiều phân khu như THE SUNRISE, THE SWAN LAKE, THE ISLAND với các tiện ích như các công viên chủ đề, khu vui chơi, và hệ thống trường học Vinschool. BM8-40 được đánh dấu rõ ràng trên bản đồ vị trí, gần các công viên lớn và trung tâm tiện ích của dự án.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới tập trung nhấn mạnh về các công viên chủ đề, khu vui chơi và hệ thống trường học, đồng thời làm rõ vị trí căn BM8-40 trên bản đồ gần các công viên lớn và trung tâm tiện ích, trong khi bản gốc nhấn mạnh gần hồ trung tâm và tiện ích xã hội đa dạng. Sự điều chỉnh giúp cung cấp thông tin tiện ích đa dạng và rõ ràng hơn phục vụ mục đích marketing.",
+        "confidence": 0.95
+      },
+      {
+        "field_name": "lifestyle_visuals",
+        "old_value": "Hình ảnh cuộc sống xanh mát với công viên cảnh quan được đầu tư, khu thể thao, hồ điều hòa cùng không gian đi bộ ven hồ tạo nên môi trường sống trong lành và hiện đại.",
+        "new_value": "Hình ảnh cuộc sống với khu công viên xanh mát, cảnh quan đẹp với các con đường chạy bộ bên hồ, tạo không gian sống trong lành, yên bình.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Phiên bản mới giữ nguyên tính xanh và cảnh quan với đường chạy bộ bên hồ nhưng giảm bớt các mô tả về khu thể thao và hồ điều hòa so với bản gốc. Tuy nhiên, vẫn duy trì hình ảnh môi trường sống yên bình, có thể ảnh hưởng nhẹ đến việc nhấn mạnh các tiện ích thể thao trong truyền thông.",
+        "confidence": 0.93
+      },
+      {
+        "field_name": "confidence_score",
+        "old_value": "0.99",
+        "new_value": "0.98",
+        "change_type": "minor numerical change",
+        "semantic_explanation": "Chỉ số độ tin cậy giảm nhẹ từ 0.99 xuống 0.98, không ảnh hưởng đáng kể đến đánh giá tổng thể về độ chính xác của dữ liệu.",
+        "confidence": 1.0
+      }
+    ],
+    "overall_assessment": "Các thay đổi chủ yếu tập trung vào mô tả tiện ích và vị trí cụ thể của sản phẩm trong phân khu The Sunrise. Việc nhấn mạnh thêm các tiện ích như trường học, trung tâm thương mại giúp gia tăng giá trị và sức hấp dẫn trong marketing sản phẩm, phù hợp với khách hàng gia đình. Một số chi tiết về khu thể thao và hồ điều hòa được giản lược nhưng không gây mất cân đối về mô tả môi trường sống. Thông tin kỹ thuật như diện tích, giá cả, và hướng nhà không thay đổi, đảm bảo tính ổn định trong định giá và giao dịch.",
+    "recommendation": "Chấp thuận dữ liệu trích xuất mới do những chỉnh sửa tăng tính hấp dẫn và làm rõ tiện ích, không làm ảnh hưởng đến các yếu tố định giá hoặc vận hành kinh doanh.",
+    "confidence_score": 0.96
+  },
+  {
+    "image_name": "TX17-186.jpg",
+    "product_code": "TX17-186",
+    "total_changes": 4,
+    "significant_changes": 3,
+    "field_changes": [
+      {
+        "field_name": "project_branding",
+        "old_value": "VINHOMES GREEN CITY - ALPHAREAL",
+        "new_value": "VINHOMES GREEN CITY, ALPHAREAL",
+        "change_type": "minor textual change",
+        "semantic_explanation": "Sự thay đổi dấu nối '-' thành dấu phẩy ',' giữa 'VINHOMES GREEN CITY' và 'ALPHAREAL' chỉ là sự khác biệt hình thức trình bày, không làm biến đổi nội dung thương hiệu của dự án.",
+        "confidence": 0.99
+      },
+      {
+        "field_name": "unit_location_map",
+        "old_value": "Căn TX17-186 thuộc phân khu The Forest, được đánh dấu rõ trên bản đồ vị trí khu vực tiện ích nội khu với các tuyến phố Trung Hoa và Nhật Bản xung quanh.",
+        "new_value": "Đơn vị TX17-186 nằm trong PHÂN KHU THE FOREST, vị trí được đánh dấu rõ ràng ở trung tâm phân khu, gần các tuyến phố Trung Hoa và Nhật Bản.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới nhấn mạnh vị trí trung tâm phân khu và mô tả rõ ràng hơn sự đánh dấu vị trí, trong khi bản cũ tập trung vào mô tả khu vực tiện ích nội khu chung quanh. Sự thay đổi này làm nổi bật vị trí trung tâm hơn, có thể thu hút khách hàng ưu tiên vị trí trung tâm thuận tiện.",
+        "confidence": 0.95
+      },
+      {
+        "field_name": "project_masterplan",
+        "old_value": "Dự án có tổng thể phân khu được thiết kế đồng bộ với nhiều tiện ích như công viên nội khu, Wellness Park, các tuyến phố thương mại Trung Hoa và Nhật Bản. Căn TX17-186 nằm ở vị trí thuận lợi bên cạnh công viên nội khu và các tiện ích chung.",
+        "new_value": "Dự án tổng thể phân chia thành các phân khu THE FOREST, THE SWAN LAKE, THE ISLAND và THE SUNRISE với các tiện ích đa dạng như công viên, trường học, trung tâm thương mại. Vị trí TX17-186 nằm gần khu vực Wellness Park và các công viên nội khu lớn.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Bản mới mở rộng và làm rõ hơn về cấu trúc phân khu và các tiện ích đa dạng bao gồm công viên, trường học và trung tâm thương mại. Sự bổ sung chi tiết này tăng tính thông tin và giá trị mô tả tiện ích cho khách hàng tiềm năng.",
+        "confidence": 0.96
+      },
+      {
+        "field_name": "lifestyle_visuals",
+        "old_value": "Hình ảnh mô phỏng không gian sống hiện đại với mặt tiền nhà phố sân vườn thương mại, công viên xanh rộng rãi và các khu phố thương mại sầm uất như khu phố Trung Hoa và Nhật Bản.",
+        "new_value": "Hình ảnh khu công viên rộng rãi, không gian sống xanh với các khu phố thương mại đặc trưng như Khu phố Trung Hoa và Khu phố Nhật Bản.",
+        "change_type": "semantic difference",
+        "semantic_explanation": "Phiên bản mới mô tả tổng quát hơn về công viên rộng rãi và không gian xanh cùng đặc trưng khu phố thương mại, trong khi bản cũ nhấn mạnh mặt tiền nhà phố sân vườn thương mại và yếu tố thương mại sầm uất. Sự thay đổi này có thể ảnh hưởng đến cách giới thiệu sản phẩm, tập trung nhiều hơn vào không gian xanh hơn là tính thương mại mạnh mẽ.",
+        "confidence": 0.93
+      }
+    ],
+    "overall_assessment": "Các thay đổi về mô tả tập trung vào việc nhấn mạnh vị trí trung tâm phân khu, cung cấp thêm chi tiết tiện ích đa dạng và tinh chỉnh cách mô tả không gian sống và mặt tiền sản phẩm. Những thay đổi này không ảnh hưởng đến các thông số kỹ thuật và giá cả, do đó không làm thay đổi giá trị định giá. Tuy nhiên, sự khác biệt về mô tả có thể giúp điều chỉnh chiến lược marketing phù hợp hơn.",
+    "recommendation": "Đề xuất chấp thuận dữ liệu mới do các thay đổi mang tính bổ sung và làm rõ chi tiết, đồng thời không gây ảnh hưởng tiêu cực đến định giá hoặc hoạt động kinh doanh.",
+    "confidence_score": 0.96
+  }
+]
