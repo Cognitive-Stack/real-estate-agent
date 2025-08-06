@@ -1,0 +1,1074 @@
+{
+    "location_and_surrounding_amenities": {
+      "label": "Vị trí & tiện ích xung quanh",
+      "key": "location_and_surrounding_amenities",
+      "type": "array",
+      "value": [
+        {
+          "key": "exact_location_on_map",
+          "label": "Vị trí chính xác trên bản đồ",
+          "type": "array",
+          "value": [
+            {
+              "key": "longitude",
+              "label": "Kinh độ (longitude)",
+              "type": "number",
+              "value": 106.8414
+            },
+            {
+              "key": "latitude",
+              "label": "Vĩ độ (latitude)",
+              "type": "number",
+              "value": 10.8411
+            }
+          ],
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "planning",
+          "label": "Quy hoạch",
+          "type": "array",
+          "value": [
+            {
+              "key": "current",
+              "label": "Hiện tại",
+              "type": "string",
+              "value": "Khu đô thị thông minh hiện đại với quy mô 272 ha, bao gồm các phân khu cao tầng và thấp tầng, công viên, trường học, bệnh viện và trung tâm thương mại."
+            },
+            {
+              "key": "ten_years",
+              "label": "10 năm",
+              "type": "string",
+              "value": "Phát triển thành một thành phố thu nhỏ với dân số dự kiến 200,000 người, hoàn thiện các tuyến đường vành đai, kết nối với sân bay quốc tế Long Thành và trở thành trung tâm mới ở phía Đông TP.HCM."
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "surrounding_amenities",
+          "label": "Tiện ích xung quanh",
+          "type": "array",
+          "value": [
+            {
+              "key": "school_distance",
+              "label": "Khoảng cách đến trường học",
+              "type": "number",
+              "value": "Hệ thống trường học liên cấp Vinschool nằm trong khuôn viên dự án.",
+              "unit": "m"
+            }
+          ],
+          "unit": null,
+          "important": true
+        }
+      ]
+    },
+    "transportation_infrastructure": {
+      "label": "Hạ tầng giao thông",
+      "key": "transportation_infrastructure",
+      "type": "array",
+      "value": [
+        {
+          "key": "main_roads_ring_roads_major_intersections",
+          "label": "Đường trục chính, vành đai, nút giao lớn",
+          "type": "string",
+          "value": "Tọa lạc trên trục đường Nguyễn Xiển - Phước Thiện, kết nối dễ dàng với Xa lộ Hà Nội và đường Vành đai 3.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "current_road_condition",
+          "label": "Tình trạng đường hiện tại",
+          "type": "string",
+          "value": "Đường nội khu rộng rãi, được quy hoạch đồng bộ. Các tuyến đường kết nối chính đang được nâng cấp và mở rộng.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "planned_upgrades",
+          "label": "Dự kiến nâng cấp",
+          "type": "string",
+          "value": "Hoàn thiện đường Vành đai 3, mở rộng các tuyến đường kết nối và phát triển hệ thống giao thông công cộng, bao gồm cả tuyến Metro.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "interprovincial_intercity_connection",
+          "label": "Kết nối liên tỉnh/liên thành phố",
+          "type": "string",
+          "value": "Dễ dàng di chuyển đến các tỉnh Đồng Nai, Bình Dương, Vũng Tàu thông qua các tuyến cao tốc.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "traffic_conditions",
+          "label": "Tình trạng giao thông",
+          "type": "array",
+          "value": [
+            {
+              "key": "normal_hours",
+              "label": "Giờ bình thường",
+              "type": "string",
+              "value": "Lưu thông thuận tiện trong khu đô thị."
+            },
+            {
+              "key": "peak_hours",
+              "label": "Giờ cao điểm",
+              "type": "string",
+              "value": "Có thể xảy ra ùn tắc trên các tuyến đường chính kết nối với trung tâm thành phố."
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "regional_connectivity",
+          "label": "Kết nối vùng",
+          "type": "string",
+          "value": "Khoảng 25 phút di chuyển đến trung tâm Quận 1 và khoảng 30 phút đến sân bay quốc tế Long Thành trong tương lai.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "residential_environment_and_security": {
+      "label": "Môi trường dân cư & an ninh",
+      "key": "residential_environment_and_security",
+      "type": "array",
+      "value": [
+        {
+          "key": "resident_type",
+          "label": "Loại dân cư",
+          "type": "enum",
+          "value": "Cộng đồng dân cư đa dạng, bao gồm các gia đình trẻ, chuyên gia và người nước ngoài.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "quietness_level",
+          "label": "Mức độ yên tĩnh",
+          "type": "string",
+          "value": "Yên tĩnh, trong lành với nhiều không gian xanh và sông nước bao quanh.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "near_market",
+          "label": "Gần chợ",
+          "type": "boolean",
+          "value": true,
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "community_intellectual_and_civilization_level",
+          "label": "Dân trí, văn minh khu vực",
+          "type": "string",
+          "value": "Cộng đồng dân cư văn minh, hiện đại, có ý thức cao.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "security_system",
+          "label": "Hệ thống an ninh",
+          "type": "array",
+          "value": [
+            {
+              "key": "low_crime_rate",
+              "label": "Ít tệ nạn",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "key": "security_24_7",
+              "label": "Bảo vệ 24/7",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "key": "security_cameras",
+              "label": "Camera an ninh",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "key": "access_card",
+              "label": "Thẻ ra vào",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "key": "control_checkpoint",
+              "label": "Chốt kiểm soát",
+              "type": "boolean",
+              "value": true
+            }
+          ],
+          "unit": null,
+          "important": true
+        }
+      ]
+    },
+    "developer": {
+      "label": "Chủ đầu tư",
+      "key": "developer",
+      "type": "array",
+      "value": [
+        {
+          "key": "name",
+          "label": "Tên",
+          "type": "string",
+          "value": "Vinhomes (Thành viên của Vingroup)",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "year_founded",
+          "label": "Năm thành lập",
+          "type": "number",
+          "value": 2008,
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "financial_capacity",
+          "label": "Năng lực tài chính",
+          "type": "string",
+          "value": "Nhà phát triển bất động sản lớn nhất Việt Nam với vốn hóa thị trường hàng tỷ đô la.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "completed_projects",
+          "label": "Dự án đã bàn giao",
+          "type": "array",
+          "value": [
+            {
+              "key": "project_1",
+              "label": "Dự án 1",
+              "type": "string",
+              "value": "Vinhomes Central Park"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "projects_for_sale",
+          "label": "Dự án đang mở bán",
+          "type": "array",
+          "value": [
+            {
+              "key": "project_1",
+              "label": "Dự án 1",
+              "type": "string",
+              "value": "Các phân khu trong Vinhomes Grand Park"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "upcoming_projects",
+          "label": "Dự án sắp mở",
+          "type": "array",
+          "value": [
+            {
+              "key": "project_1",
+              "label": "Dự án 1",
+              "type": "string",
+              "value": "Thông tin chưa được công bố"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "quality_assessment",
+          "label": "Đánh giá chất lượng",
+          "type": "string",
+          "value": "Chất lượng xây dựng và tiện ích được đánh giá cao, theo tiêu chuẩn của Vinhomes.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "legal_assessment",
+          "label": "Đánh giá pháp lý",
+          "type": "string",
+          "value": "Pháp lý minh bạch, tuân thủ các quy định của pháp luật.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "legal": {
+      "label": "Pháp lý",
+      "key": "legal",
+      "type": "array",
+      "value": [
+        {
+          "key": "ownership_certificate",
+          "label": "Sổ đỏ/sổ hồng",
+          "type": "string",
+          "value": "Sổ hồng cho từng căn hộ, sở hữu lâu dài đối với người Việt Nam và 50 năm đối với người nước ngoài.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "bank_guarantee_for_off_plan_properties",
+          "label": "Giấy bảo lãnh ngân hàng (nếu bán hình thành trong tương lai)",
+          "type": "string",
+          "value": "Được bảo lãnh bởi các ngân hàng lớn như Techcombank.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "construction_permit",
+          "label": "Giấy phép xây dựng",
+          "type": "string",
+          "value": "Đã có giấy phép xây dựng cho các phân khu.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "land_allocation_decision",
+          "label": "Quyết định giao đất",
+          "type": "string",
+          "value": "Đã có quyết định giao đất cho toàn bộ dự án.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "foundation_acceptance_certificate",
+          "label": "Nghiệm thu phần móng",
+          "type": "string",
+          "value": "Đã hoàn thành và được nghiệm thu.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "document_of_eligibility_for_sale",
+          "label": "Văn bản đủ điều kiện bán",
+          "type": "string",
+          "value": "Đã có văn bản cho phép bán nhà ở hình thành trong tương lai.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "sample_contract",
+          "label": "Hợp đồng mẫu",
+          "type": "string",
+          "value": "Hợp đồng mua bán rõ ràng, minh bạch.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "transfer_terms",
+          "label": "Điều khoản chuyển nhượng",
+          "type": "string",
+          "value": "Được phép chuyển nhượng theo quy định của pháp luật.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "progress_commitment",
+          "label": "Cam kết tiến độ",
+          "type": "string",
+          "value": "Cam kết bàn giao đúng tiến độ đã công bố.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "handover_commitment",
+          "label": "Cam kết bàn giao",
+          "type": "string",
+          "value": "Bàn giao căn hộ với tiêu chuẩn hoàn thiện theo hợp đồng.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "late_payment_penalty",
+          "label": "Phạt chậm thanh toán",
+          "type": "string",
+          "value": "Áp dụng theo các điều khoản trong hợp đồng mua bán.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "planning_text",
+          "label": "Quy hoạch",
+          "type": "string",
+          "value": "Quy hoạch chi tiết 1/500 đã được phê duyệt.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "planning_images",
+          "label": "Quy hoạch",
+          "type": "array",
+          "value": {
+            "key": "planning_image_1",
+            "type": "image",
+            "value": [
+              {
+                "url": "0d3cadef-940e-4941-8a8c-b1f54d816942/Example_image.svg.png",
+                "description": "Sơ đồ tổng thể dự án Vinhomes Grand Park"
+              }
+            ]
+          },
+          "unit": null,
+          "important": true
+        }
+      ]
+    },
+    "construction_contractor": {
+      "label": "Đơn vị thi công",
+      "key": "construction_contractor",
+      "type": "array",
+      "value": [
+        {
+          "key": "contractor_name",
+          "label": "Tên nhà thầu",
+          "type": "string",
+          "value": "Coteccons, Hòa Bình, Delta, Unicons",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "capacity_scale",
+          "label": "Quy mô năng lực",
+          "type": "string",
+          "value": "Các nhà thầu xây dựng hàng đầu Việt Nam với kinh nghiệm thi công nhiều dự án lớn.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "professional_practice_certificate",
+          "label": "Chứng chỉ hành nghề",
+          "type": "string",
+          "value": "Có đầy đủ các chứng chỉ hành nghề xây dựng theo quy định.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "previous_completed_projects",
+          "label": "Các dự án bàn giao trước đó",
+          "type": "array",
+          "value": [
+            {
+              "key": "project_1",
+              "label": "Dự án 1",
+              "type": "string",
+              "value": "Landmark 81"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "material_quality",
+          "label": "Chất lượng vật liệu",
+          "type": "string",
+          "value": "Sử dụng vật liệu xây dựng cao cấp, đảm bảo chất lượng công trình.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "applied_technology",
+          "label": "Công nghệ áp dung",
+          "type": "string",
+          "value": "Áp dụng các công nghệ xây dựng tiên tiến để đảm bảo tiến độ và chất lượng.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "design_philosophy",
+          "label": "Triết lý thiết kế",
+          "type": "string",
+          "value": "Thiết kế hiện đại, tối ưu hóa không gian và thân thiện với môi trường.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "interior_design_unit": {
+      "label": "Đơn vị nội thất",
+      "key": "interior_design_unit",
+      "type": "array",
+      "value": [
+        {
+          "key": "contractor_name",
+          "label": "Tên nhà thầu",
+          "type": "string",
+          "value": "Tùy chọn theo gói bàn giao của chủ đầu tư hoặc khách hàng tự hoàn thiện.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "capacity_scale",
+          "label": "Quy mô năng lực",
+          "type": "string",
+          "value": "Nhiều đơn vị thiết kế và thi công nội thất uy tín trên thị trường.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "professional_practice_certificate",
+          "label": "Chứng chỉ hành nghề",
+          "type": "string",
+          "value": "Có đầy đủ chứng chỉ chuyên môn.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "previous_completed_projects",
+          "label": "Các dự án bàn giao trước đó",
+          "type": "array",
+          "value": [
+            {
+              "key": "project_1",
+              "label": "Dự án 1",
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "material_quality",
+          "label": "Chất lượng vật liệu",
+          "type": "string",
+          "value": "Sử dụng vật liệu đa dạng từ cơ bản đến cao cấp.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "applied_technology",
+          "label": "Công nghệ áp dung",
+          "type": "string",
+          "value": "Áp dụng các xu hướng thiết kế và công nghệ sản xuất nội thất mới nhất.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "design_philosophy",
+          "label": "Triết lý thiết kế",
+          "type": "string",
+          "value": "Đa dạng phong cách thiết kế để đáp ứng nhu cầu của khách hàng.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "management_unit": {
+      "label": "Đơn vị quản lý",
+      "key": "management_unit",
+      "type": "array",
+      "value": [
+        {
+          "key": "management_unit_name",
+          "label": "Tên đơn vị quản lý",
+          "type": "string",
+          "value": "Vinhomes",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "management_fee",
+          "label": "Phí quản lý",
+          "type": "number",
+          "value": "Dao động tùy theo phân khu và loại hình căn hộ, khoảng từ 8,000 - 16,000 VND/m²",
+          "unit": "VND/m²",
+          "important": null
+        },
+        {
+          "key": "services_provided",
+          "label": "Dịch vụ cung cấp",
+          "type": "array",
+          "value": [
+            {
+              "key": "technical_maintenance",
+              "label": "Bảo trì kỹ thuật",
+              "type": "string",
+              "value": "Bảo trì hệ thống kỹ thuật chung của tòa nhà."
+            },
+            {
+              "key": "security",
+              "label": "An ninh",
+              "type": "string",
+              "value": "Đảm bảo an ninh 24/7."
+            },
+            {
+              "key": "cleaning_sanitation",
+              "label": "Vệ sinh",
+              "type": "string",
+              "value": "Dọn dẹp vệ sinh khu vực chung."
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "service_quality",
+          "label": "Chất lượng dịch vụ",
+          "type": "enum",
+          "value": "Cao cấp",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "fire_prevention_and_fighting",
+          "label": "Phòng cháy chữa cháy",
+          "type": "string",
+          "value": "Hệ thống phòng cháy chữa cháy hiện đại, đạt tiêu chuẩn.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "project_overview": {
+      "label": "Tổng quan dự án",
+      "key": "project_overview",
+      "type": "array",
+      "value": [
+        {
+          "key": "project_name",
+          "label": "Tên dự án",
+          "type": "string",
+          "value": "Vinhomes Grand Park",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "total_land_area",
+          "label": "Tổng diện tích đất",
+          "type": "number",
+          "value": 2720000,
+          "unit": "m²",
+          "important": true
+        },
+        {
+          "key": "total_number_of_blocks",
+          "label": "Tổng số block",
+          "type": "number",
+          "value": 71,
+          "unit": "block",
+          "important": true
+        },
+        {
+          "key": "number_of_floors",
+          "label": "Số tầng",
+          "type": "number",
+          "value": "25 - 35",
+          "unit": "tầng",
+          "important": null
+        },
+        {
+          "key": "number_of_basement_floors",
+          "label": "Số tầng hầm",
+          "type": "number",
+          "value": 2,
+          "unit": "tầng",
+          "important": null
+        },
+        {
+          "key": "total_number_of_units",
+          "label": "Số căn hộ tổng",
+          "type": "array",
+          "value": [
+            {
+              "key": "apartment",
+              "label": "Chung cư",
+              "type": "number",
+              "value": 44000,
+              "unit": "căn hộ"
+            },
+            {
+              "key": "townhouse",
+              "label": "Nhà phố",
+              "type": "number",
+              "value": 1600,
+              "unit": "căn hộ"
+            },
+            {
+              "key": "shophouse",
+              "label": "Shophouse",
+              "type": "number",
+              "value": 700,
+              "unit": "căn hộ"
+            },
+            {
+              "key": "villa",
+              "label": "Biệt thự",
+              "type": "number",
+              "value": 400,
+              "unit": "căn hộ"
+            },
+            {
+              "key": "officetel",
+              "label": "Officetel",
+              "type": "number",
+              "unit": "căn hộ"
+            },
+            {
+              "key": "condotel",
+              "label": "Condotel",
+              "type": "number",
+              "unit": "căn hộ"
+            },
+            {
+              "key": "studio",
+              "label": "Studio",
+              "type": "number",
+              "unit": "căn hộ"
+            },
+            {
+              "key": "dual_key",
+              "label": "Dual key",
+              "type": "number",
+              "unit": "căn hộ"
+            },
+            {
+              "key": "penthouse_skyvilla",
+              "label": "Penthouse/Skyvilla",
+              "type": "number",
+              "unit": "căn hộ"
+            },
+            {
+              "key": "duplex",
+              "label": "Duplex",
+              "type": "number",
+              "unit": "căn hộ"
+            }
+          ],
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "resident_scale",
+          "label": "Quy mô dân cư",
+          "type": "array",
+          "value": [
+            {
+              "key": "current",
+              "label": "Hiện tại",
+              "type": "number",
+              "unit": "người"
+            },
+            {
+              "key": "future",
+              "label": "Tương lai",
+              "type": "number",
+              "value": 200000,
+              "unit": "người"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "total_investment_capital",
+          "label": "Tổng vốn đầu tư",
+          "type": "number",
+          "value": "Thông tin không được công bố",
+          "unit": "VND",
+          "important": null
+        },
+        {
+          "key": "selling_price",
+          "label": "Giá mua bán",
+          "type": "array",
+          "value": [
+            {
+              "key": "average",
+              "label": "Trung bình",
+              "type": "number",
+              "value": "45 - 65 triệu VND/m²",
+              "unit": "VND/m²"
+            },
+            {
+              "key": "highest",
+              "label": "Cao nhất",
+              "type": "number",
+              "unit": "VND/m²"
+            },
+            {
+              "key": "lowest",
+              "label": "Thấp nhất",
+              "type": "number",
+              "unit": "VND/m²"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "rental_price",
+          "label": "Giá cho thuê",
+          "type": "array",
+          "value": [
+            {
+              "key": "average",
+              "label": "Trung bình",
+              "type": "number",
+              "value": "7 - 15 triệu VND/tháng cho căn hộ",
+              "unit": "VND/m²"
+            },
+            {
+              "key": "highest",
+              "label": "Cao nhất",
+              "type": "number",
+              "unit": "VND/m²"
+            },
+            {
+              "key": "lowest",
+              "label": "Thấp nhất",
+              "type": "number",
+              "unit": "VND/m²"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "unit_area",
+          "label": "Diện tích căn hộ",
+          "type": "array",
+          "value": [
+            {
+              "key": "smallest",
+              "label": "Nhỏ nhất",
+              "type": "number",
+              "value": 30,
+              "unit": "m²"
+            },
+            {
+              "key": "largest",
+              "label": "Lớn nhất",
+              "type": "number",
+              "value": 120,
+              "unit": "m²"
+            }
+          ],
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "status",
+          "label": "Trạng thái",
+          "type": "enum",
+          "value": "Đang mở bán và đã bàn giao một số phân khu.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "segment",
+          "label": "Phân khúc",
+          "type": "enum",
+          "value": "Trung cấp, cao cấp",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "internal_amenities",
+          "label": "Tiện ích nội khu",
+          "type": "enum",
+          "value": null,
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "design_style",
+          "label": "Phong cách thiết kế",
+          "type": "enum",
+          "value": "Hiện đại, tối giản, và theo chủ đề của từng phân khu (Nhật Bản, Beverly Hills).",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "drawings",
+          "label": "Bản vẽ",
+          "type": "array",
+          "value": {
+            "key": "drawings_image_1",
+            "type": "image",
+            "value": [
+              {
+                "url": "0d3cadef-940e-4941-8a8c-b1f54d816942/Example_image.svg.png",
+                "description": "Mặt bằng tổng thể Vinhomes Grand Park"
+              }
+            ]
+          },
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "mockup_images",
+          "label": "Hình mẫu",
+          "type": "array",
+          "value": {
+            "key": "mockup_image_1",
+            "type": "image",
+            "value": [
+              {
+                "url": "0d3cadef-940e-4941-8a8c-b1f54d816942/Example_image.svg.png",
+                "description": "Hình ảnh phối cảnh dự án"
+              }
+            ]
+          },
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "construction_density",
+          "label": "Mật độ xây dựng",
+          "type": "number",
+          "value": 22.5,
+          "unit": "%",
+          "important": null
+        },
+        {
+          "key": "land_use_coefficient",
+          "label": "Hệ số sử dụng đất",
+          "type": "number",
+          "value": "Thông tin không được công bố",
+          "unit": "m²",
+          "important": null
+        },
+        {
+          "key": "greenery_density",
+          "label": "Mật độ cây xanh",
+          "type": "string",
+          "value": "Lớn, với công viên trung tâm 36ha và nhiều không gian xanh khác.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "expected_handover",
+          "label": "Dự kiến bàn giao",
+          "type": "string",
+          "value": "Đã bàn giao một số phân khu, các phân khu còn lại đang trong quá trình xây dựng và sẽ bàn giao theo từng giai đoạn.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "progress",
+          "label": "Tiến độ",
+          "type": "array",
+          "value": [
+            {
+              "key": "date_04_2025",
+              "label": "Ngày 4/2025",
+              "type": "string"
+            }
+          ],
+          "unit": null,
+          "important": true
+        }
+      ]
+    },
+    "sales_policy": {
+      "label": "Chính sách bán hàng",
+      "key": "sales_policy",
+      "type": "array",
+      "value": [
+        {
+          "key": "payment_policy",
+          "label": "Chính sách thanh toán",
+          "type": "enum",
+          "value": null,
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "rental_commitment_for_investment",
+          "label": "Cam kết thuê lại đầu tư",
+          "type": "string",
+          "value": "Tùy thuộc vào từng thời điểm và phân khu.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "estimated_rental_yield",
+          "label": "Tỷ suất cho thuê ước tính",
+          "type": "number",
+          "value": 5,
+          "unit": "%",
+          "important": null
+        },
+        {
+          "key": "other_gifts",
+          "label": "Quà tặng khác",
+          "type": "string",
+          "value": "Thường có các chương trình khuyến mãi như tặng voucher mua sắm, miễn phí phí quản lý trong những năm đầu.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    },
+    "investment_and_profit_potential": {
+      "label": "Đầu tư & tiềm năng sinh lời",
+      "key": "investment_and_profit_potential",
+      "type": "array",
+      "value": [
+        {
+          "key": "expected_appreciation_value",
+          "label": "Giá trị tăng giá kỳ vọng",
+          "type": "string",
+          "value": "Tiềm năng tăng giá tốt nhờ vào sự phát triển của cơ sở hạ tầng và vị trí chiến lược.",
+          "unit": null,
+          "important": true
+        },
+        {
+          "key": "current_price_compared_to_area",
+          "label": "Mức giá hiện tại so với khu vực",
+          "type": "string",
+          "value": "Giá bán cạnh tranh so với các dự án cùng phân khúc trong khu vực.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "current_supply",
+          "label": "Nguồn cung hiện tại",
+          "type": "enum",
+          "value": "Dồi dào",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "number_of_transactions",
+          "label": "Lượng giao dịch đã thực hiện",
+          "type": "string",
+          "value": "Số lượng lớn căn hộ đã được bán ra.",
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "ease_of_resale",
+          "label": "Dễ mua bán",
+          "type": "boolean",
+          "value": true,
+          "unit": null,
+          "important": null
+        },
+        {
+          "key": "annual_rental_yield",
+          "label": "Tỷ suất cho thuê năm",
+          "type": "number",
+          "value": 4.5,
+          "unit": "%",
+          "important": true
+        },
+        {
+          "key": "rentability",
+          "label": "Khả năng cho thuê",
+          "type": "string",
+          "value": "Cao do nhu cầu thuê nhà ở khu vực này lớn, đặc biệt là từ các chuyên gia làm việc tại khu công nghệ cao và các khu công nghiệp lân cận.",
+          "unit": null,
+          "important": null
+        }
+      ]
+    }
+  }

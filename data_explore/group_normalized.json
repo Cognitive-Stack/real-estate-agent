@@ -1,0 +1,169 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 106.8414,
+      "latitude": 10.8411
+    },
+    "planning": {
+      "current": "Khu đô thị thông minh hiện đại với quy mô 272 ha, bao gồm các phân khu cao tầng và thấp tầng, công viên, trường học, bệnh viện và trung tâm thương mại.",
+      "ten_years": "Phát triển thành một thành phố thu nhỏ với dân số dự kiến 200,000 người, hoàn thiện các tuyến đường vành đai, kết nối với sân bay quốc tế Long Thành và trở thành trung tâm mới ở phía Đông TP.HCM."
+    },
+    "surrounding_amenities": {
+      "school_distance": "Hệ thống trường học liên cấp Vinschool nằm trong khuôn viên dự án."
+    }
+  },
+  "transportation_infrastructure": {
+    "main_roads_ring_roads_major_intersections": "Tọa lạc trên trục đường Nguyễn Xiển - Phước Thiện, kết nối dễ dàng với Xa lộ Hà Nội và đường Vành đai 3.",
+    "current_road_condition": "Đường nội khu rộng rãi, được quy hoạch đồng bộ. Các tuyến đường kết nối chính đang được nâng cấp và mở rộng.",
+    "planned_upgrades": "Hoàn thiện đường Vành đai 3, mở rộng các tuyến đường kết nối và phát triển hệ thống giao thông công cộng, bao gồm cả tuyến Metro.",
+    "interprovincial_intercity_connection": "Dễ dàng di chuyển đến các tỉnh Đồng Nai, Bình Dương, Vũng Tàu thông qua các tuyến cao tốc.",
+    "traffic_conditions": {
+      "normal_hours": "Lưu thông thuận tiện trong khu đô thị.",
+      "peak_hours": "Có thể xảy ra ùn tắc trên các tuyến đường chính kết nối với trung tâm thành phố."
+    },
+    "regional_connectivity": "Khoảng 25 phút di chuyển đến trung tâm Quận 1 và khoảng 30 phút đến sân bay quốc tế Long Thành trong tương lai."
+  },
+  "residential_environment_and_security": {
+    "resident_type": "Cộng đồng dân cư đa dạng, bao gồm các gia đình trẻ, chuyên gia và người nước ngoài.",
+    "quietness_level": "Yên tĩnh, trong lành với nhiều không gian xanh và sông nước bao quanh.",
+    "near_market": true,
+    "community_intellectual_and_civilization_level": "Cộng đồng dân cư văn minh, hiện đại, có ý thức cao.",
+    "security_system": {
+      "low_crime_rate": true,
+      "security_24_7": true,
+      "security_cameras": true,
+      "access_card": true,
+      "control_checkpoint": true
+    }
+  },
+  "developer": {
+    "name": "Vinhomes (Thành viên của Vingroup)",
+    "year_founded": 2008,
+    "financial_capacity": "Nhà phát triển bất động sản lớn nhất Việt Nam với vốn hóa thị trường hàng tỷ đô la.",
+    "completed_projects": {
+      "project_1": "Vinhomes Central Park"
+    },
+    "projects_for_sale": {
+      "project_1": "Các phân khu trong Vinhomes Grand Park"
+    },
+    "upcoming_projects": {
+      "project_1": "Thông tin chưa được công bố"
+    },
+    "quality_assessment": "Chất lượng xây dựng và tiện ích được đánh giá cao, theo tiêu chuẩn của Vinhomes.",
+    "legal_assessment": "Pháp lý minh bạch, tuân thủ các quy định của pháp luật."
+  },
+  "legal": {
+    "ownership_certificate": "Sổ hồng cho từng căn hộ, sở hữu lâu dài đối với người Việt Nam và 50 năm đối với người nước ngoài.",
+    "bank_guarantee_for_off_plan_properties": "Được bảo lãnh bởi các ngân hàng lớn như Techcombank.",
+    "construction_permit": "Đã có giấy phép xây dựng cho các phân khu.",
+    "land_allocation_decision": "Đã có quyết định giao đất cho toàn bộ dự án.",
+    "foundation_acceptance_certificate": "Đã hoàn thành và được nghiệm thu.",
+    "document_of_eligibility_for_sale": "Đã có văn bản cho phép bán nhà ở hình thành trong tương lai.",
+    "sample_contract": "Hợp đồng mua bán rõ ràng, minh bạch.",
+    "transfer_terms": "Được phép chuyển nhượng theo quy định của pháp luật.",
+    "progress_commitment": "Cam kết bàn giao đúng tiến độ đã công bố.",
+    "handover_commitment": "Bàn giao căn hộ với tiêu chuẩn hoàn thiện theo hợp đồng.",
+    "late_payment_penalty": "Áp dụng theo các điều khoản trong hợp đồng mua bán.",
+    "planning_text": "Quy hoạch chi tiết 1/500 đã được phê duyệt.",
+    "planning_images": []
+  },
+  "construction_contractor": {
+    "contractor_name": "Coteccons, Hòa Bình, Delta, Unicons",
+    "capacity_scale": "Các nhà thầu xây dựng hàng đầu Việt Nam với kinh nghiệm thi công nhiều dự án lớn.",
+    "professional_practice_certificate": "Có đầy đủ các chứng chỉ hành nghề xây dựng theo quy định.",
+    "previous_completed_projects": {
+      "project_1": "Landmark 81"
+    },
+    "material_quality": "Sử dụng vật liệu xây dựng cao cấp, đảm bảo chất lượng công trình.",
+    "applied_technology": "Áp dụng các công nghệ xây dựng tiên tiến để đảm bảo tiến độ và chất lượng.",
+    "design_philosophy": "Thiết kế hiện đại, tối ưu hóa không gian và thân thiện với môi trường."
+  },
+  "interior_design_unit": {
+    "contractor_name": "Tùy chọn theo gói bàn giao của chủ đầu tư hoặc khách hàng tự hoàn thiện.",
+    "capacity_scale": "Nhiều đơn vị thiết kế và thi công nội thất uy tín trên thị trường.",
+    "professional_practice_certificate": "Có đầy đủ chứng chỉ chuyên môn.",
+    "previous_completed_projects": {
+      "project_1": ""
+    },
+    "material_quality": "Sử dụng vật liệu đa dạng từ cơ bản đến cao cấp.",
+    "applied_technology": "Áp dụng các xu hướng thiết kế và công nghệ sản xuất nội thất mới nhất.",
+    "design_philosophy": "Đa dạng phong cách thiết kế để đáp ứng nhu cầu của khách hàng."
+  },
+  "management_unit": {
+    "management_unit_name": "Vinhomes",
+    "management_fee": "Dao động tùy theo phân khu và loại hình căn hộ, khoảng từ 8,000 - 16,000 VND/m²",
+    "services_provided": {
+      "technical_maintenance": "Bảo trì hệ thống kỹ thuật chung của tòa nhà.",
+      "security": "Đảm bảo an ninh 24/7.",
+      "cleaning_sanitation": "Dọn dẹp vệ sinh khu vực chung."
+    },
+    "service_quality": "Cao cấp",
+    "fire_prevention_and_fighting": "Hệ thống phòng cháy chữa cháy hiện đại, đạt tiêu chuẩn."
+  },
+  "project_overview": {
+    "project_name": "Vinhomes Grand Park",
+    "total_land_area": 2720000,
+    "total_number_of_blocks": 71,
+    "number_of_floors": "25 - 35",
+    "number_of_basement_floors": 2,
+    "total_number_of_units": {
+      "apartment": 44000,
+      "townhouse": 1600,
+      "shophouse": 700,
+      "villa": 400,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 200000
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "45 - 65 triệu VND/m²",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "7 - 15 triệu VND/tháng cho căn hộ",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 30,
+      "largest": 120
+    },
+    "status": "Đang mở bán và đã bàn giao một số phân khu.",
+    "segment": "Trung cấp, cao cấp",
+    "internal_amenities": null,
+    "design_style": "Hiện đại, tối giản, và theo chủ đề của từng phân khu (Nhật Bản, Beverly Hills).",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 22.5,
+    "land_use_coefficient": null,
+    "greenery_density": "Lớn, với công viên trung tâm 36ha và nhiều không gian xanh khác.",
+    "expected_handover": "Đã bàn giao một số phân khu, các phân khu còn lại đang trong quá trình xây dựng và sẽ bàn giao theo từng giai đoạn.",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": {
+    "payment_policy": null,
+    "rental_commitment_for_investment": "Tùy thuộc vào từng thời điểm và phân khu.",
+    "estimated_rental_yield": 5,
+    "other_gifts": "Thường có các chương trình khuyến mãi như tặng voucher mua sắm, miễn phí phí quản lý trong những năm đầu."
+  },
+  "investment_and_profit_potential": {
+    "expected_appreciation_value": "Tiềm năng tăng giá tốt nhờ vào sự phát triển của cơ sở hạ tầng và vị trí chiến lược.",
+    "current_price_compared_to_area": "Giá bán cạnh tranh so với các dự án cùng phân khúc trong khu vực.",
+    "current_supply": "Dồi dào",
+    "number_of_transactions": "Số lượng lớn căn hộ đã được bán ra.",
+    "ease_of_resale": true,
+    "annual_rental_yield": 4.5,
+    "rentability": "Cao do nhu cầu thuê nhà ở khu vực này lớn, đặc biệt là từ các chuyên gia làm việc tại khu công nghệ cao và các khu công nghiệp lân cận."
+  }
+}
