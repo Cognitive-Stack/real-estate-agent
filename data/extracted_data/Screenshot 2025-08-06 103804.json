@@ -1,0 +1,75 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 0.0,
+      "latitude": 0.0
+    },
+    "planning": {
+      "current": "The Origami tọa lạc trong đại đô thị đẳng cấp quốc tế Vinhomes Grand Park, thành phố phía Đông hiện đại của TP. Hồ Chí Minh.",
+      "ten_years": "Kế hoạch phát triển dài hạn kết hợp với các tiện ích đẳng cấp, nâng tầm chuẩn sống hiện đại với sự phát triển bền vững của khu vực."
+    },
+    "surrounding_amenities": {
+      "school_distance": "Không có thông tin cụ thể về khoảng cách đến trường học trong hình ảnh."
+    }
+  },
+  "transportation_infrastructure": null,
+  "residential_environment_and_security": null,
+  "developer": null,
+  "legal": null,
+  "construction_contractor": null,
+  "interior_design_unit": null,
+  "management_unit": null,
+  "project_overview": {
+    "project_name": "The Origami",
+    "total_land_area": 360000,
+    "total_number_of_blocks": 0,
+    "number_of_floors": "Không khả dụng",
+    "number_of_basement_floors": 0,
+    "total_number_of_units": {
+      "apartment": 0,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 0
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 0,
+      "largest": 0
+    },
+    "status": "Không khả dụng",
+    "segment": "Không khả dụng",
+    "internal_amenities": "Dự án bao gồm công viên Olympic Gym hiện đại được trang bị hệ thống mô tô tổ chức năng tiên tiến tạo môi trường luyện tập thể dục thể thao và thư giãn cho cư dân.",
+    "design_style": "Mang đậm tinh thần Nhật Bản, phong cách kiến trúc kết hợp hài hòa giữa hiện đại và thiên nhiên xanh, tạo nên môi trường sống xanh, trong lành, đầy sức sống.",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Mật độ cây xanh lớn, với nhiều mặt nước và khu vực công viên tạo không gian thoáng đãng, trong lành.",
+    "expected_handover": "Không có thông tin",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": null,
+  "investment_and_profit_potential": null
+}

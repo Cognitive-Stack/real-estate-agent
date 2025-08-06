@@ -1,0 +1,77 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 0.0,
+      "latitude": 0.0
+    },
+    "planning": {
+      "current": "The Origami nằm trong khu đô thị Vinhomes Grand Park với quy mô 271ha, thuộc phía Đông TP. Hồ Chí Minh.",
+      "ten_years": "Khu đô thị được quy hoạch bài bản, hiện đại với tiện ích đa dạng phục vụ cư dân trong 10 năm tới và xa hơn."
+    },
+    "surrounding_amenities": {
+      "school_distance": "Có trường học Vinschool trong khu vực, giúp thuận tiện cho cư dân có con em đến trường."
+    }
+  },
+  "transportation_infrastructure": null,
+  "residential_environment_and_security": null,
+  "developer": null,
+  "legal": null,
+  "construction_contractor": null,
+  "interior_design_unit": null,
+  "management_unit": null,
+  "project_overview": {
+    "project_name": "The Origami",
+    "total_land_area": 0,
+    "total_number_of_blocks": 0,
+    "number_of_floors": "Không khả dụng",
+    "number_of_basement_floors": 0,
+    "total_number_of_units": {
+      "apartment": 0,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 0
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 0,
+      "largest": 0
+    },
+    "status": "Không khả dụng",
+    "segment": "Không khả dụng",
+    "internal_amenities": "Dự án hưởng lợi từ 6 trụ cột tiện ích hoàn hảo: Vinmec (bệnh viện quốc tế), Vinschool (trường học), Vincom Mega Mall (trung tâm thương mại lớn), The Manhattan (khu căn hộ cao cấp), Bến thuyền Manhattan Glory, Tháp văn phòng 45 tầng.",
+    "design_style": "Không có thông tin cụ thể về phong cách thiết kế trên hình ảnh.",
+    "drawings": [],
+    "mockup_images": [
+      "https://vinhomesgrandpark.vn/wp-content/uploads/2021/12/vincom-megamall-vinhomes-grand-park.png"
+    ],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Không có thông tin cụ thể về mật độ cây xanh.",
+    "expected_handover": "Không khả dụng",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": null,
+  "investment_and_profit_potential": null
+}

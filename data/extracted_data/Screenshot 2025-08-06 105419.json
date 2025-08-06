@@ -1,0 +1,169 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 0.0,
+      "latitude": 0.0
+    },
+    "planning": {
+      "current": "Phát triển đô thị xanh thông minh với 3 mặt sông lớn nhất Sài Gòn, công viên 36 ha lớn nhất Đông Nam Á và 15 công viên chủ đề đặc sắc, độc đáo.",
+      "ten_years": "Không khả dụng"
+    },
+    "surrounding_amenities": {
+      "school_distance": "Gần Vinmec và Vinschool, tiện ích Vincom Mega Mall"
+    }
+  },
+  "transportation_infrastructure": {
+    "main_roads_ring_roads_major_intersections": "Không rõ thông tin cụ thể.",
+    "current_road_condition": "Không có thông tin chính xác về tình trạng đường hiện tại.",
+    "planned_upgrades": "Không có thông tin về kế hoạch nâng cấp đường.",
+    "interprovincial_intercity_connection": "Không khả dụng.",
+    "traffic_conditions": {
+      "normal_hours": "Không rõ.",
+      "peak_hours": "Không rõ."
+    },
+    "regional_connectivity": "Không tài liệu chi tiết."
+  },
+  "residential_environment_and_security": {
+    "resident_type": "Dân cư đa dạng; các căn hộ studio đến căn hộ 3PN+ phục vụ nhu cầu đa dạng.",
+    "quietness_level": "Môi trường sống xanh, yên tĩnh với công viên lớn và sông bao quanh.",
+    "near_market": true,
+    "community_intellectual_and_civilization_level": "Cộng đồng văn minh, trí thức cao nhờ các tiện ích giáo dục và y tế đồng bộ trong dự án.",
+    "security_system": {
+      "low_crime_rate": false,
+      "security_24_7": false,
+      "security_cameras": false,
+      "access_card": false,
+      "control_checkpoint": false
+    }
+  },
+  "developer": {
+    "name": "Tập đoàn Vingroup",
+    "year_founded": 1993,
+    "financial_capacity": "Tài chính mạnh, uy tín hàng đầu Việt Nam với nhiều dự án thành công.",
+    "completed_projects": {
+      "project_1": "Không rõ tên các dự án khác."
+    },
+    "projects_for_sale": {
+      "project_1": "Origami"
+    },
+    "upcoming_projects": {
+      "project_1": "Không có"
+    },
+    "quality_assessment": "Chất lượng dự án được đánh giá cao, ứng dụng công nghệ thông minh và tiện nghi All in one.",
+    "legal_assessment": "Đủ điều kiện pháp lý, không có nợ hay áp lực tài chính."
+  },
+  "legal": {
+    "ownership_certificate": "Không có thông tin cụ thể.",
+    "bank_guarantee_for_off_plan_properties": "Không có thông tin.",
+    "construction_permit": "Không có thông tin.",
+    "land_allocation_decision": "Không có thông tin.",
+    "foundation_acceptance_certificate": "Không có thông tin.",
+    "document_of_eligibility_for_sale": "Đã đủ điều kiện bán hàng.",
+    "sample_contract": "Không có thông tin.",
+    "transfer_terms": "Không có thông tin.",
+    "progress_commitment": "Không có thông tin.",
+    "handover_commitment": "Giao nhà đúng tháng 12 năm 2021.",
+    "late_payment_penalty": "Không có thông tin.",
+    "planning_text": "Không có.",
+    "planning_images": []
+  },
+  "construction_contractor": {
+    "contractor_name": "Không khả dụng",
+    "capacity_scale": "Không khả dụng",
+    "professional_practice_certificate": "Không khả dụng",
+    "previous_completed_projects": {
+      "project_1": "Không có thông tin"
+    },
+    "material_quality": "Không có thông tin",
+    "applied_technology": "Không có thông tin",
+    "design_philosophy": "Không có thông tin"
+  },
+  "interior_design_unit": {
+    "contractor_name": "Không có thông tin",
+    "capacity_scale": "Không có thông tin",
+    "professional_practice_certificate": "Không có thông tin",
+    "previous_completed_projects": {
+      "project_1": "Không có thông tin"
+    },
+    "material_quality": "Thiết bị hoàn thiện gồm thiết bị vệ sinh Toto, sàn gỗ phòng ngủ, máy lạnh, chuông cửa.",
+    "applied_technology": "Không có thông tin",
+    "design_philosophy": "Không có thông tin"
+  },
+  "management_unit": {
+    "management_unit_name": "Không có thông tin",
+    "management_fee": "Không có thông tin",
+    "services_provided": {
+      "technical_maintenance": "Không có thông tin",
+      "security": "Không có thông tin",
+      "cleaning_sanitation": "Không có thông tin"
+    },
+    "service_quality": "Không có thông tin",
+    "fire_prevention_and_fighting": "Không có thông tin"
+  },
+  "project_overview": {
+    "project_name": "Origami",
+    "total_land_area": 25400,
+    "total_number_of_blocks": 25,
+    "number_of_floors": "21-36 tầng",
+    "number_of_basement_floors": 2,
+    "total_number_of_units": {
+      "apartment": 5000,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 21000
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "Không có thông tin chính xác",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không có thông tin",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 27,
+      "largest": 108
+    },
+    "status": "Đã mở bán và bàn giao một phần vào tháng 12/2021",
+    "segment": "Cao cấp, căn hộ đa dạng.",
+    "internal_amenities": "Công viên 36 ha, Vincom Mega Mall, Vinmec, Vinschool, bến du thuyền, tháp văn phòng 45 tầng, các tiện ích thể thao và bãi đỗ xe rộng rãi.",
+    "design_style": "Thiết kế theo hình chữ Z, T, U với số căn và mặt bằng đa dạng.",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Cao nhờ công viên và mặt nước",
+    "expected_handover": "Tháng 12/2021",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": {
+    "payment_policy": "Kí TTDĐC 50 triệu, sau 15 ngày ký HĐMB đóng 15% (đã gồm VAT), các đợt thanh toán tiếp theo chia theo % từ 20%,15%, trong quá trình nhận nhà có 2 đợt thanh toán 5% BT + 5% VAT.",
+    "rental_commitment_for_investment": "Không có thông tin cam kết cho thuê.",
+    "estimated_rental_yield": 0,
+    "other_gifts": "Voucher mua xe Vinfast trị giá từ 70 triệu đến 200 triệu kèm theo tùy diện tích căn hộ."
+  },
+  "investment_and_profit_potential": {
+    "expected_appreciation_value": "Không có con số cụ thể nhưng dự án nằm trong khu đô thị lớn với tiềm năng tăng giá cao.",
+    "current_price_compared_to_area": "Không có thông tin cụ thể.",
+    "current_supply": "5.000 căn hộ",
+    "number_of_transactions": "Không có thông tin giao dịch cụ thể.",
+    "ease_of_resale": false,
+    "annual_rental_yield": 0.0,
+    "rentability": "Tiềm năng cho thuê tốt do vị trí và tiện ích đồng bộ, tuy nhiên không có cam kết."
+  }
+}

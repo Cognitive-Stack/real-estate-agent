@@ -1,0 +1,75 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 0.0,
+      "latitude": 0.0
+    },
+    "planning": {
+      "current": "Dự án nằm trong khu đô thị Vinhomes Grand Park với nhiều không gian xanh và tiện ích nội khu đẳng cấp.",
+      "ten_years": "Phát triển bền vững với mục tiêu xây dựng một thành phố xanh, sạch, hiện đại kéo dài trong 10 năm."
+    },
+    "surrounding_amenities": {
+      "school_distance": "Không có thông tin cụ thể về khoảng cách đến trường học trong hình ảnh."
+    }
+  },
+  "transportation_infrastructure": null,
+  "residential_environment_and_security": null,
+  "developer": null,
+  "legal": null,
+  "construction_contractor": null,
+  "interior_design_unit": null,
+  "management_unit": null,
+  "project_overview": {
+    "project_name": "The Origami - Vinhomes Grand Park",
+    "total_land_area": 360000,
+    "total_number_of_blocks": 0,
+    "number_of_floors": "Không khả dụng",
+    "number_of_basement_floors": 0,
+    "total_number_of_units": {
+      "apartment": 0,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 0
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 0,
+      "largest": 0
+    },
+    "status": "Không khả dụng",
+    "segment": "Không khả dụng",
+    "internal_amenities": "Tiện ích nổi bật gồm khu chèo thuyền Kayak phát triển trải nghiệm ngoài trời độc đáo tại Sài Gòn, khu dã ngoại Sandy Park với bãi cát trắng trong lành, BBQ Garden và Quảng trường Grand Park với sức chứa hàng nghìn người, tổ chức sự kiện văn hoá – giải trí, tạo không gian gắn kết cộng đồng cư dân.",
+    "design_style": "Phong cách thiết kế hiện đại kết hợp cùng thiên nhiên, tạo môi trường sống trong lành, gần gũi với thiên nhiên, đặc trưng không gian xanh rộng lớn.",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Không gian xanh rộng lớn với hồ nước, cây cối nhiều tạo môi trường trong lành.",
+    "expected_handover": "Không có thông tin về thời gian bàn giao.",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": null,
+  "investment_and_profit_potential": null
+}

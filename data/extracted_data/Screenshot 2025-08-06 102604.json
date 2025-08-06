@@ -1,0 +1,76 @@
+{
+  "location_and_surrounding_amenities": null,
+  "transportation_infrastructure": null,
+  "residential_environment_and_security": null,
+  "developer": null,
+  "legal": null,
+  "construction_contractor": null,
+  "interior_design_unit": null,
+  "management_unit": null,
+  "project_overview": {
+    "project_name": "The Origami",
+    "total_land_area": 0,
+    "total_number_of_blocks": 0,
+    "number_of_floors": "Không khả dụng",
+    "number_of_basement_floors": 0,
+    "total_number_of_units": {
+      "apartment": 0,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 0
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "3.113.946.644 VND",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không khả dụng",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 43,
+      "largest": 46
+    },
+    "status": "Không khả dụng",
+    "segment": "Không khả dụng",
+    "internal_amenities": null,
+    "design_style": "Không khả dụng",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Không khả dụng",
+    "expected_handover": "08/06/2025",
+    "progress": {
+      "date_04_2025": "Đang trong giai đoạn chuẩn bị thanh toán cọc và các đợt thanh toán theo tiến độ từ tháng 8/2025 đến 12/2026"
+    }
+  },
+  "sales_policy": {
+    "payment_policy": "Phương án 1 - Thanh toán theo tiến độ chuẩn với lịch thanh toán chi tiết từ 08/06/2025 đến ngày nhận nhà 14/12/2026 và nhận giấy chứng nhận quyền sở hữu ngày 19/11/2025.",
+    "rental_commitment_for_investment": "Không có thông tin về cam kết cho thuê.",
+    "estimated_rental_yield": 0,
+    "other_gifts": "Ưu đãi 1% từ chương trình Gói quà tặng mùa hè, ưu đãi 24% cho khách hàng thanh toán chuẩn được trừ vào giá bán."
+  },
+  "investment_and_profit_potential": {
+    "expected_appreciation_value": "Ưu đãi tổng 25% (1% + 24%) giúp giảm giá mua hiệu quả, tiềm năng tăng giá khi nhận bàn giao cuối 2026 và sở hữu sổ hồng 2025.",
+    "current_price_compared_to_area": "Giá bán trung bình khoảng 3.113.946.644 VND cho căn 1 phòng ngủ + 1 với diện tích tim tường 46,50 m².",
+    "current_supply": "Không có thông tin về nguồn cung hiện tại.",
+    "number_of_transactions": "Không khả dụng.",
+    "ease_of_resale": false,
+    "annual_rental_yield": 0.0,
+    "rentability": "Thông tin chưa rõ ràng về lợi nhuận cho thuê, chủ yếu tập trung vào ưu đãi khi mua."
+  }
+}

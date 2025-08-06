@@ -1,0 +1,169 @@
+{
+  "location_and_surrounding_amenities": {
+    "exact_location_on_map": {
+      "longitude": 0.0,
+      "latitude": 0.0
+    },
+    "planning": {
+      "current": "Không có",
+      "ten_years": "Không có"
+    },
+    "surrounding_amenities": {
+      "school_distance": "Không có"
+    }
+  },
+  "transportation_infrastructure": {
+    "main_roads_ring_roads_major_intersections": "Không có",
+    "current_road_condition": "Không có",
+    "planned_upgrades": "Không có",
+    "interprovincial_intercity_connection": "Không có",
+    "traffic_conditions": {
+      "normal_hours": "Không có",
+      "peak_hours": "Không có"
+    },
+    "regional_connectivity": "Không có"
+  },
+  "residential_environment_and_security": {
+    "resident_type": "Không có",
+    "quietness_level": "Không có",
+    "near_market": false,
+    "community_intellectual_and_civilization_level": "Không có",
+    "security_system": {
+      "low_crime_rate": false,
+      "security_24_7": false,
+      "security_cameras": false,
+      "access_card": false,
+      "control_checkpoint": false
+    }
+  },
+  "developer": {
+    "name": "Vingroup",
+    "year_founded": 1993,
+    "financial_capacity": "Rất mạnh, thuộc tập đoàn phát triển dự án lớn tại Việt Nam",
+    "completed_projects": {
+      "project_1": "Vinhomes Grand Park"
+    },
+    "projects_for_sale": {
+      "project_1": "The Origami"
+    },
+    "upcoming_projects": {
+      "project_1": "Không có"
+    },
+    "quality_assessment": "Phát triển dự án quy mô lớn với chất lượng cao",
+    "legal_assessment": "Tuân thủ các quy định pháp lý Việt Nam"
+  },
+  "legal": {
+    "ownership_certificate": "Không có thông tin cụ thể",
+    "bank_guarantee_for_off_plan_properties": "Có hỗ trợ lãi suất theo chính sách vay ngân hàng",
+    "construction_permit": "Không có",
+    "land_allocation_decision": "Không có",
+    "foundation_acceptance_certificate": "Không có",
+    "document_of_eligibility_for_sale": "Không khả dụng",
+    "sample_contract": "Không có",
+    "transfer_terms": "Không có",
+    "progress_commitment": "Không có",
+    "handover_commitment": "Không có",
+    "late_payment_penalty": "Không có",
+    "planning_text": "Không có",
+    "planning_images": []
+  },
+  "construction_contractor": {
+    "contractor_name": "Không có",
+    "capacity_scale": "Không có",
+    "professional_practice_certificate": "Không có",
+    "previous_completed_projects": {
+      "project_1": "Không có"
+    },
+    "material_quality": "Không có",
+    "applied_technology": "Không có",
+    "design_philosophy": "Không có"
+  },
+  "interior_design_unit": {
+    "contractor_name": "Không có",
+    "capacity_scale": "Không có",
+    "professional_practice_certificate": "Không có",
+    "previous_completed_projects": {
+      "project_1": "Không có"
+    },
+    "material_quality": "Không có",
+    "applied_technology": "Không có",
+    "design_philosophy": "Không có"
+  },
+  "management_unit": {
+    "management_unit_name": "Không có",
+    "management_fee": "Không có",
+    "services_provided": {
+      "technical_maintenance": "Không có",
+      "security": "Không có",
+      "cleaning_sanitation": "Không có"
+    },
+    "service_quality": "Không có",
+    "fire_prevention_and_fighting": "Không có"
+  },
+  "project_overview": {
+    "project_name": "The Origami - Vinhomes Grand Park",
+    "total_land_area": 0,
+    "total_number_of_blocks": 0,
+    "number_of_floors": "Không có",
+    "number_of_basement_floors": 0,
+    "total_number_of_units": {
+      "apartment": 0,
+      "townhouse": 0,
+      "shophouse": 0,
+      "villa": 0,
+      "officetel": null,
+      "condotel": null,
+      "studio": null,
+      "dual_key": null,
+      "penthouse_skyvilla": null,
+      "duplex": null
+    },
+    "resident_scale": {
+      "current": null,
+      "future": 0
+    },
+    "total_investment_capital": null,
+    "selling_price": {
+      "average": "41.000.000 VND/m²",
+      "highest": null,
+      "lowest": null
+    },
+    "rental_price": {
+      "average": "Không có",
+      "highest": null,
+      "lowest": null
+    },
+    "unit_area": {
+      "smallest": 41,
+      "largest": 0
+    },
+    "status": "Đang mở bán",
+    "segment": "Phân khúc tầm trung - cao cấp",
+    "internal_amenities": "Không có",
+    "design_style": "Phong cách kiến trúc Nhật Bản",
+    "drawings": [],
+    "mockup_images": [],
+    "construction_density": 0.0,
+    "land_use_coefficient": null,
+    "greenery_density": "Không có",
+    "expected_handover": "Không có",
+    "progress": {
+      "date_04_2025": null
+    }
+  },
+  "sales_policy": {
+    "payment_policy": "Thanh toán 10% ký HĐMB, 15% khi nhận nhà; hỗ trợ lãi suất 0% trong 15 tháng kể từ ngày giải ngân; hỗ trợ trả lãi 7-8%/năm trong 2 năm sau khi hết thời hạn ưu đãi; phương án vay ngân hàng 80% với nhiều đợt thanh toán theo tiến độ xây dựng.",
+    "rental_commitment_for_investment": "Không có cam kết thuê lại cụ thể trong tài liệu",
+    "estimated_rental_yield": 0,
+    "other_gifts": "Không có thông tin khuyến mại đi kèm"
+  },
+  "investment_and_profit_potential": {
+    "expected_appreciation_value": "Phát triển dự án trong khu vực đô thị lớn của TP. Hồ Chí Minh có tiềm năng tăng giá trong tương lai.",
+    "current_price_compared_to_area": "Giá bán 41 triệu VND/m² phù hợp với khu vực và phân khúc trung cao cấp.",
+    "current_supply": "Dự án đang mở bán với lượng sản phẩm hữu hạn.",
+    "number_of_transactions": "Không có dữ liệu giao dịch cụ thể.",
+    "ease_of_resale": true,
+    "annual_rental_yield": 0.0,
+    "rentability": "Có khả năng cho thuê tốt do thuộc dự án Vinhomes quy mô lớn với tiện ích đồng bộ."
+  }
+}
